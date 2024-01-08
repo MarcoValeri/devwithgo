@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"devwithgo/controllers"
+	"net/http"
+)
 
 func main() {
-	fmt.Println("Dev With GO")
+	// Controllers
+	controllers.Home()
+
+	http.ListenAndServe(":80", nil)
 }
