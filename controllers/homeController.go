@@ -14,7 +14,7 @@ type PageData struct {
 func Home() {
 	setCurrentYear := time.Now().Year()
 
-	tmpl := template.Must(template.ParseFiles("./views/home.html", "./views/templates/head.html", "./views/templates/header.html", "./views/templates/footer.html"))
+	tmpl := template.Must(template.ParseFiles("./views/templates/base.html", "./views/home.html"))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		data := PageData{
 			PageTitle:   "Do it with GO",

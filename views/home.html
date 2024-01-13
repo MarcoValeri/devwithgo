@@ -1,8 +1,7 @@
-{{ template "head" . }}
-<title>{{.PageTitle}}</title>
-</head>
-<body>
-    {{ template "header" . }}
-    {{ template "footer" . }}
-</body>
-</html>
+{{template "base" .}}
+
+{{define "title"}}{{.PageTitle}}{{end}}
+
+{{ define "content"}}
+<h2>This is the main content</h2>
+{{end}}
