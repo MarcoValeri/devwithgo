@@ -1,0 +1,16 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 5rem;
+    background-color: $blueGO;
+    
+    &__container-content {
+        text-align: center;
+    }
+
+    &__heart {
+        font-size: 2rem;
+        color: $red;
+    }
+}
