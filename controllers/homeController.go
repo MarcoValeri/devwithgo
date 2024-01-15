@@ -1,25 +1,17 @@
 package controllers
 
 import (
+	"devwithgo/models"
 	"html/template"
 	"net/http"
-	"time"
 )
 
-type PageData struct {
-	PageTitle   string
-	CurrentYear int
-}
-
 func Home() {
-	setCurrentYear := time.Now().Year()
+	setPageData := models.NewPageData("Do it with GO")
 
 	tmpl := template.Must(template.ParseFiles("./views/templates/base.html", "./views/home.html"))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		data := PageData{
-			PageTitle:   "Do it with GO",
-			CurrentYear: setCurrentYear,
-		}
+		data := setPageData
 		tmpl.Execute(w, data)
 	})
 }
