@@ -1,0 +1,29 @@
+.base-admin {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-areas:
+    "base-admin__sidebar base-admin__content";
+    border: 1px solid #d00;
+
+    @include respond("lg") {
+        grid-template-columns: 1fr 2fr;
+    }
+
+    @include respond("md") {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+        "base-admin__sidebar"
+        "base-admin__content";
+        border: 1px solid #00d;
+    }
+
+    &__sidebar {
+        grid-area: base-admin__sidebar;
+        border: 1px solid $black;
+    }
+
+    &__content {
+        grid-area: base-admin__content;
+        border: 1px solid #00d;
+    }
+}

@@ -1,3 +1,35 @@
+/**
+* Create a mixin that works for
+* media queries in the following breakpoints:
+*           xs
+*           sm
+*           md
+*           lg
+*           xl
+*           xxl
+*
+* This project follow the logic of responsive-design
+*/
+.base-admin {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-areas: "base-admin__sidebar base-admin__content";
+  border: 1px solid #d00; }
+  @media only screen and (max-width: 991px) {
+    .base-admin {
+      grid-template-columns: 1fr 2fr; } }
+  @media only screen and (max-width: 767px) {
+    .base-admin {
+      grid-template-columns: 1fr;
+      grid-template-areas: "base-admin__sidebar" "base-admin__content";
+      border: 1px solid #00d; } }
+  .base-admin__sidebar {
+    grid-area: base-admin__sidebar;
+    border: 1px solid #000; }
+  .base-admin__content {
+    grid-area: base-admin__content;
+    border: 1px solid #00d; }
+
 * {
   padding: 0;
   margin: 0; }

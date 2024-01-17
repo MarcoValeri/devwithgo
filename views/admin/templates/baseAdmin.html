@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/main.css">
+    <title>Dev with GO admin dashboard</title>
+</head>
+<body>
+    <main class="base-admin">
+        <sidebar class="base-admin__sidebar">
+            <div class="base-admin__sidebar-wrapper">
+                <div class="base-admin__sidebar-logo">
+                    <h2 class="h2">Dev With GO</h2>
+                </div>
+                <ul>
+                    <li><a href="/">Back to the website</a></li>
+                    <li><a href="/admin">Dashboard</a></li>
+                </ul>
+            </div>
+        </sidebar>
+        <section class="base-admin__content">
+            {{template "adminContent" .}}
+        </section>
+    </main>
+</body>
+</html>
