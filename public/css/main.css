@@ -50,3 +50,9 @@ html {
   .footer__heart {
     font-size: 2rem;
     color: #d00; }
+
+.home {
+  height: 50vh;
+  padding: 5rem; }
+  .home__container-content {
+    text-align: center; }
