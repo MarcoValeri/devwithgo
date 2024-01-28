@@ -11,9 +11,11 @@
             <div class="admin-login__form-wrapper">
                 <div class="admin-login__container-email">
                     <input type="text" name="email" placeholder="email*">
+                    <span>{{.EmailValidation}}</span>
                 </div>
                 <div class="admin-login__container-password">
                     <input type="password" name="password" placeholder="password*">
+                    <span>{{.PasswordValidation}}</span>
                 </div>
                 <div class="admin-login__container-submit">
                     <input type="submit" value="login">
