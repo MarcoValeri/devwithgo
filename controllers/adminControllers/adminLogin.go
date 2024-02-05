@@ -1,6 +1,7 @@
 package admincontrollers
 
 import (
+	"devwithgo/models"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -64,7 +65,7 @@ func AdminLogin() {
 			}
 
 			// Form validation
-			if getEmail == "info@marcovaleri.net" && getPassword == "1234" {
+			if models.IsAnUserAdmin(getEmail, getPassword) {
 				http.Redirect(w, r, "/admin/dashboard", http.StatusSeeOther)
 			} else {
 				setLoginValidation.EmailValidation = "Error: email and password are not valid"
