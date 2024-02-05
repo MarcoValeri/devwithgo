@@ -65,7 +65,7 @@ func AdminLogin() {
 
 			// Form validation
 			if getEmail == "info@marcovaleri.net" && getPassword == "1234" {
-				http.Redirect(w, r, "http://localhost/admin/dashboard", http.StatusSeeOther)
+				http.Redirect(w, r, "/admin/dashboard", http.StatusSeeOther)
 			} else {
 				setLoginValidation.EmailValidation = "Error: email and password are not valid"
 				setLoginValidation.PasswordValidation = "Error: email and password are not valid"
