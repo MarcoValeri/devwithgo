@@ -1,0 +1,8 @@
+# db configuration
+db:
+    type: mariadb:11.2
+    disk: 256
+
+# Relationships enable access from this app to a given service
+relationships:
+    database: "db:mysql"
