@@ -36,3 +36,6 @@ web:
         '/': 
             allow: false
             passthru: true
+
+relationships:
+    database: "devwithgo_db:mysql"
