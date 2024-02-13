@@ -1,6 +1,23 @@
 {{template "baseAdmin" .}}
 <div class="admin-user-add">
     {{ define "adminContent"}}
-        <h2>admin-user-add.html</h2>
+        <div class="admin-user-add">
+            <form method="POST">
+                <div class="admin-user-add__form-wrapper">
+                    <div class="admin-user-add__container-email">
+                        <input type="text" name="user-add-email" placeholder="Email*" required />
+                    </div>
+                    <div class="admin-user-add__container-password">
+                        <input type="password" name="user-add-password" placeholder="Password*" required />
+                    </div>
+                    <div class="admin-user-add__container-password-repeat">
+                        <input type="password" name="user-add-password-repeat" placeholder="Repeat the password" required />
+                    </div>
+                    <div class="admin-user-add__container-button">
+                        <input type="submit" name="user-add-new-submit" value="Add new user">
+                    </div>
+                </div>
+            </form>
+        </div>
     {{end}}
 </div>

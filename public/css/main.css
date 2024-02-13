@@ -10,6 +10,9 @@
 *
 * This project follow the logic of responsive-design
 */
+.admin-user-add {
+  border: 1px solid #d00; }
+
 .base-admin {
   display: grid;
   grid-template-columns: 1fr 4fr;
