@@ -17,7 +17,7 @@ type LoginValidation struct {
 }
 
 func AdminLogin() {
-	tmpl := template.Must(template.ParseFiles("./views/admin/login.html"))
+	tmpl := template.Must(template.ParseFiles("./views/admin/admin-login.html"))
 	http.HandleFunc("/admin/login", func(w http.ResponseWriter, r *http.Request) {
 
 		setLoginValidation := LoginValidation{
