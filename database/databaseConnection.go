@@ -1,4 +1,4 @@
-package util
+package database
 
 import (
 	"database/sql"
@@ -39,7 +39,7 @@ func DatabaseConnectionPlatformSh() *sql.DB {
 	return dbPlatformSh
 }
 
-func DatabaseLocalConnection() *sql.DB {
+func DatabaseConnectionLocal() *sql.DB {
 
 	err := godotenv.Load(".env")
 	if err != nil {

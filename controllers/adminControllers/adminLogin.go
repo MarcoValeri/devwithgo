@@ -2,13 +2,9 @@ package admincontrollers
 
 import (
 	"devwithgo/models"
-	"fmt"
+	"devwithgo/util"
 	"html/template"
 	"net/http"
-	"net/mail"
-	"strings"
-
-	"github.com/microcosm-cc/bluemonday"
 )
 
 type LoginValidation struct {
@@ -31,36 +27,21 @@ func AdminLogin() {
 		getLogin := r.FormValue("login")
 
 		if len(getLogin) > 0 {
-			// Email: check user input
-			// Space at the left and right position of the string
-			getEmail = strings.TrimSpace(getEmail)
-
-			// Avoid HTML injection
-			sanitizeHtml := bluemonday.StrictPolicy()
-			getEmail = sanitizeHtml.Sanitize(getEmail)
+			getEmail = util.FormSanitizeStringInput(getEmail)
+			getPassword = util.FormSanitizeStringInput(getPassword)
 
 			// Check if email format is right
-			_, err := mail.ParseAddress(getEmail)
-			if err != nil {
+			if !util.FormEmailInput(getEmail) {
 				setLoginValidation.EmailValidation = "Error: email format is not valid"
-				fmt.Println(setLoginValidation.EmailValidation)
 			}
 
 			// Check email length, no less that 5 charactes, no longer than 40 characters
-			if len(getEmail) < 5 || len(getEmail) > 40 {
+			if !util.FormEmailLengthInput(getEmail) {
 				setLoginValidation.EmailValidation = "Error: email length must be greater than 5 characters and no greater than 20 characters"
-				fmt.Println(len(getEmail))
 			}
 
-			// Password: check user input
-			// Remove space to the left and right of the string
-			getPassword = strings.TrimSpace(getPassword)
-
-			// Avodi HTML injection
-			getPassword = sanitizeHtml.Sanitize(getPassword)
-
 			// Check password length, minimum 8 charactes, max 20
-			if len(getPassword) < 8 || len(getPassword) > 20 {
+			if !util.FormPasswordInput(getPassword) {
 				setLoginValidation.PasswordValidation = "Error: password must be minimum 8 characters but no longher than 20 characters"
 			}
 

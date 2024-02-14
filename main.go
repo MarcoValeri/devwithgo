@@ -2,7 +2,7 @@ package main
 
 import (
 	"devwithgo/controllers"
-	"devwithgo/util"
+	"devwithgo/database"
 	"net/http"
 	// psh "github.com/platformsh/gohelper"
 )
@@ -23,10 +23,10 @@ func main() {
 	controllers.AdminController()
 
 	// Database Local
-	util.DatabaseLocalConnection()
+	database.DatabaseConnectionLocal()
 
 	// Database Platform sh
-	// util.DatabaseConnectionPlatformSh()
+	// database.DatabaseConnectionPlatformSh()
 
 	// Local env
 	http.ListenAndServe(":80", nil)
