@@ -9,12 +9,16 @@
                 <div class="admin-user-add__form-wrapper">
                     <div class="admin-user-add__container-email">
                         <input type="text" name="user-add-email" placeholder="Email*" required />
+                        <span>{{.EmailError}}</span>
                     </div>
                     <div class="admin-user-add__container-password">
                         <input type="password" name="user-add-password" placeholder="Password*" required />
+                        <span>{{.PasswordError}}</span>
                     </div>
                     <div class="admin-user-add__container-password-repeat">
                         <input type="password" name="user-add-password-repeat" placeholder="Repeat the password" required />
+                        <span>{{.PasswordRepearError}}</span>
+                        <span>{{.PasswordMatch}}</span>
                     </div>
                     <div class="admin-user-add__container-button">
                         <input type="submit" name="user-add-new-submit" value="Add new user">
