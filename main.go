@@ -22,11 +22,12 @@ func main() {
 	controllers.Home()
 	controllers.AdminController()
 
-	// Database Local
-	database.DatabaseConnectionLocal()
-
-	// Database Platform sh
-	// database.DatabaseConnectionPlatformSh()
+	/**
+	* DB connection
+	* parameter "platform" connect to Platform.sh
+	* parameter "local" connect to local db
+	 */
+	database.DatabaseConnection("local")
 
 	// Local env
 	http.ListenAndServe(":80", nil)

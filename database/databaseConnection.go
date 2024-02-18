@@ -15,7 +15,20 @@ import (
 var dbPlatformSh *sql.DB
 var dbLocal *sql.DB
 
-func DatabaseConnectionPlatformSh() *sql.DB {
+func DatabaseConnection(setDatabase string) *sql.DB {
+
+	if setDatabase == "local" {
+		return databaseConnectionLocal()
+	}
+
+	if setDatabase == "platform" {
+		return databaseConnectionPlatformSh()
+	}
+
+	return databaseConnectionPlatformSh()
+}
+
+func databaseConnectionPlatformSh() *sql.DB {
 	config, err := psh.NewRuntimeConfig()
 	if err != nil {
 		log.Fatal("Some error occured. Err: $s", err)
@@ -39,7 +52,7 @@ func DatabaseConnectionPlatformSh() *sql.DB {
 	return dbPlatformSh
 }
 
-func DatabaseConnectionLocal() *sql.DB {
+func databaseConnectionLocal() *sql.DB {
 
 	err := godotenv.Load(".env")
 	if err != nil {

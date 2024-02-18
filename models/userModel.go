@@ -18,8 +18,7 @@ func UserAdminNew(getUserAdminId int, getUserAdminEmail, getUserAdminPassowrd st
 }
 
 func UserAdminAddNewToDB(getNewUserAdmin userAdmin) {
-	// db := database.DatabaseConnectionPlatformSh()
-	db := database.DatabaseConnectionLocal()
+	db := database.DatabaseConnection("local")
 	query, err := db.Query("INSERT INTO users (email, password) VALUES (?, ?)", getNewUserAdmin.email, getNewUserAdmin.password)
 	if err != nil {
 		panic(err.Error())
