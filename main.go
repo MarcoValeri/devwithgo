@@ -27,7 +27,7 @@ func main() {
 	* parameter "platform" connect to Platform.sh
 	* parameter "local" connect to local db
 	 */
-	database.DatabaseConnection("local")
+	database.DatabaseConnection()
 
 	// Local env
 	http.ListenAndServe(":80", nil)

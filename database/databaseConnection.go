@@ -15,13 +15,15 @@ import (
 var dbPlatformSh *sql.DB
 var dbLocal *sql.DB
 
-func DatabaseConnection(setDatabase string) *sql.DB {
+func DatabaseConnection() *sql.DB {
 
-	if setDatabase == "local" {
+	flag := "local"
+
+	if flag == "local" {
 		return databaseConnectionLocal()
 	}
 
-	if setDatabase == "platform" {
+	if flag == "platform" {
 		return databaseConnectionPlatformSh()
 	}
 

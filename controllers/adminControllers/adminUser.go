@@ -3,6 +3,7 @@ package admincontrollers
 import (
 	"devwithgo/models"
 	"devwithgo/util"
+	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -18,7 +19,13 @@ type dataPage struct {
 func AdminUsers() {
 	tmpl := template.Must(template.ParseFiles("./views/admin/templates/baseAdmin.html", "./views/admin/admin-users.html"))
 	http.HandleFunc("/admin/users", func(w http.ResponseWriter, r *http.Request) {
-		data := "Admin Users"
+
+		data := dataPage{
+			PageTitle: "Admin Users",
+		}
+
+		fmt.Println(models.UserAdminShowUsers())
+
 		tmpl.Execute(w, data)
 	})
 }
@@ -109,7 +116,7 @@ func AdminUserAdd() {
 			if isFormSubmittionValid {
 				createNewUserAdmin := models.UserAdminNew(1, getAdminUserEmail, getAdminUserPassword)
 				models.UserAdminAddNewToDB(createNewUserAdmin)
-				http.Redirect(w, r, "/admin/dashboard", http.StatusSeeOther)
+				http.Redirect(w, r, "/admin/users", http.StatusSeeOther)
 			}
 		}
 
