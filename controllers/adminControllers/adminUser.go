@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"strings"
 )
 
 type dataPage struct {
@@ -14,17 +15,23 @@ type dataPage struct {
 	PasswordError       string
 	PasswordRepearError string
 	PasswordMatch       string
+	UsersData           [][]string
 }
 
 func AdminUsers() {
 	tmpl := template.Must(template.ParseFiles("./views/admin/templates/baseAdmin.html", "./views/admin/admin-users.html"))
 	http.HandleFunc("/admin/users", func(w http.ResponseWriter, r *http.Request) {
 
+		usersData, err := models.UserAdminShowUsers()
+		if err != nil {
+			fmt.Println("error getting usetsData: %w", err)
+		}
+		fmt.Println(usersData[0][1])
+
 		data := dataPage{
 			PageTitle: "Admin Users",
+			UsersData: usersData,
 		}
-
-		fmt.Println(models.UserAdminShowUsers())
 
 		tmpl.Execute(w, data)
 	})
@@ -121,5 +128,14 @@ func AdminUserAdd() {
 		}
 
 		tmpl.Execute(w, data)
+	})
+}
+
+func AdminUserEdit() {
+	tmpl := template.Must(template.ParseFiles("./views/admin/templates/baseAdmin.html", "./views/admin/admin-user-edit.html"))
+	http.HandleFunc("/admin/user-edit/", func(w http.ResponseWriter, r *http.Request) {
+		id := strings.TrimPrefix(r.URL.Path, "/admin/user-edit/")
+		fmt.Println("id", id)
+		tmpl.Execute(w, nil)
 	})
 }

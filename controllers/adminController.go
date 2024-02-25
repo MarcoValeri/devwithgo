@@ -9,4 +9,5 @@ func AdminController() {
 
 	admincontrollers.AdminUsers()
 	admincontrollers.AdminUserAdd()
+	admincontrollers.AdminUserEdit()
 }

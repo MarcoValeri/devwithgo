@@ -4,6 +4,13 @@
 
 <div class="admin-users">
     {{ define "adminContent"}}
-        <h2>user.html</h2>
+        <h2>All users</h2>
+        {{ range .UsersData }}
+            <p>User</p>
+            {{ range . }}
+                <p>{{ . }}</p>
+            {{ end }}
+            <br />
+        {{ end }}
     {{end}}
 </div>
