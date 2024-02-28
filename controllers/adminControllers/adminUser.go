@@ -16,7 +16,6 @@ type dataPage struct {
 	PasswordError       string
 	PasswordRepearError string
 	PasswordMatch       string
-	UsersData           [][]string
 	UserAdminData       []models.UserAdmin
 }
 
@@ -28,7 +27,6 @@ func AdminUsers() {
 		if err != nil {
 			fmt.Println("error getting usetsData: %w", err)
 		}
-		fmt.Println(usersData)
 
 		data := dataPage{
 			PageTitle:     "Admin Users",
@@ -153,8 +151,8 @@ func AdminUserEdit() {
 
 		// Create data for the page
 		data := dataPage{
-			PageTitle: "Admin User Edit",
-			UsersData: getUserEdit,
+			PageTitle:     "Admin User Edit",
+			UserAdminData: getUserEdit,
 		}
 
 		/**

@@ -5,9 +5,13 @@
 <div class="admin-users">
     {{ define "adminContent"}}
         <h2>Admin User Edit</h2>
-        {{ if .UsersData }}
-            {{ range .UsersData }}
-                <p>{{ . }}</p>
+        {{ if .UserAdminData }}
+            {{ range .UserAdminData }}
+                <p>User ID: {{ .Id }}</p>
+                <p>Email: {{ .Email }}</p>
+                <p>Password: {{ .Password }}</p>
+                <a href="/admin/user-edit/{{ .Id }}">Edit</a>
+                <br />
             {{ end }}
         {{ else }}
         <p>No user has been selected</p>

@@ -3,7 +3,6 @@ package models
 import (
 	"devwithgo/database"
 	"fmt"
-	"strconv"
 )
 
 type UserAdmin struct {
@@ -48,7 +47,7 @@ func UserEdminEdit(getEditedUserAdmin UserAdmin) error {
 	return nil
 }
 
-func UserAdminFindIt(getUserAdminId int) ([][]string, error) {
+func UserAdminFindIt(getUserAdminId int) ([]UserAdmin, error) {
 	db := database.DatabaseConnection()
 	defer db.Close()
 
@@ -59,7 +58,7 @@ func UserAdminFindIt(getUserAdminId int) ([][]string, error) {
 	}
 	defer rows.Close()
 
-	var getUserData [][]string
+	var getUserData []UserAdmin
 	for rows.Next() {
 		var userId int
 		var userEmail string
@@ -68,8 +67,9 @@ func UserAdminFindIt(getUserAdminId int) ([][]string, error) {
 		if err != nil {
 			return nil, err
 		}
-		userDetails := []string{strconv.Itoa(userId), userEmail, userPw}
-		getUserData = append(getUserData, userDetails)
+		// userDatails := []string{strconv.Itoa(userId), userEmail, userPw}
+		userDatails := UserAdminNew(userId, userEmail, userPw)
+		getUserData = append(getUserData, userDatails)
 	}
 
 	return getUserData, nil
@@ -92,19 +92,6 @@ func UserAdminShowUsers() ([]UserAdmin, error) {
 	}
 	defer rows.Close()
 
-	// var allUsers [][]string
-	// for rows.Next() {
-	// 	var userId int
-	// 	var userEmail string
-	// 	var userPw string
-	// 	err = rows.Scan(&userId, &userEmail, &userPw)
-	// 	if err != nil {
-	// 		return nil, err
-	// 	}
-	// 	userDatails := []string{strconv.Itoa(userId), userEmail, userPw}
-	// 	allUsers = append(allUsers, userDatails)
-	// }
-
 	var allUsers []UserAdmin
 	for rows.Next() {
 		var userId int
@@ -114,12 +101,9 @@ func UserAdminShowUsers() ([]UserAdmin, error) {
 		if err != nil {
 			return nil, err
 		}
-		// userDatails := []string{strconv.Itoa(userId), userEmail, userPw}
 		userDatails := UserAdminNew(userId, userEmail, userPw)
 		allUsers = append(allUsers, userDatails)
 	}
-
-	fmt.Println(allUsers)
 
 	return allUsers, nil
 }
