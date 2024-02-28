@@ -6,26 +6,26 @@ import (
 	"strconv"
 )
 
-type userAdmin struct {
-	id       int
-	email    string
-	password string
+type UserAdmin struct {
+	Id       int
+	Email    string
+	Password string
 }
 
-func UserAdminNew(getUserAdminId int, getUserAdminEmail, getUserAdminPassowrd string) userAdmin {
-	setNewUserAdmin := userAdmin{
-		id:       getUserAdminId,
-		email:    getUserAdminEmail,
-		password: getUserAdminPassowrd,
+func UserAdminNew(getUserAdminId int, getUserAdminEmail, getUserAdminPassowrd string) UserAdmin {
+	setNewUserAdmin := UserAdmin{
+		Id:       getUserAdminId,
+		Email:    getUserAdminEmail,
+		Password: getUserAdminPassowrd,
 	}
 	return setNewUserAdmin
 }
 
-func UserAdminAddNewToDB(getNewUserAdmin userAdmin) error {
+func UserAdminAddNewToDB(getNewUserAdmin UserAdmin) error {
 	db := database.DatabaseConnection()
 	defer db.Close()
 
-	query, err := db.Query("INSERT INTO users (email, password) VALUES (?, ?)", getNewUserAdmin.email, getNewUserAdmin.password)
+	query, err := db.Query("INSERT INTO users (email, password) VALUES (?, ?)", getNewUserAdmin.Email, getNewUserAdmin.Password)
 	if err != nil {
 		return fmt.Errorf("error adding user: %w", err)
 	}
@@ -34,11 +34,11 @@ func UserAdminAddNewToDB(getNewUserAdmin userAdmin) error {
 	return nil
 }
 
-func UserEdminEdit(getEditedUserAdmin userAdmin) error {
+func UserEdminEdit(getEditedUserAdmin UserAdmin) error {
 	db := database.DatabaseConnection()
 	defer db.Close()
 
-	query, err := db.Query("UPDATE users SET email = ?, password = ? WHERE id = ?", getEditedUserAdmin.email, getEditedUserAdmin.password, getEditedUserAdmin.id)
+	query, err := db.Query("UPDATE users SET email = ?, password = ? WHERE id = ?", getEditedUserAdmin.Email, getEditedUserAdmin.Password, getEditedUserAdmin.Id)
 	if err != nil {
 		fmt.Println("Error on editing user query")
 		return err
@@ -82,7 +82,7 @@ func IsAnUserAdmin(getEmail, getPassword string) bool {
 	return false
 }
 
-func UserAdminShowUsers() ([][]string, error) {
+func UserAdminShowUsers() ([]UserAdmin, error) {
 	db := database.DatabaseConnection()
 	defer db.Close()
 
@@ -92,7 +92,20 @@ func UserAdminShowUsers() ([][]string, error) {
 	}
 	defer rows.Close()
 
-	var allUsers [][]string
+	// var allUsers [][]string
+	// for rows.Next() {
+	// 	var userId int
+	// 	var userEmail string
+	// 	var userPw string
+	// 	err = rows.Scan(&userId, &userEmail, &userPw)
+	// 	if err != nil {
+	// 		return nil, err
+	// 	}
+	// 	userDatails := []string{strconv.Itoa(userId), userEmail, userPw}
+	// 	allUsers = append(allUsers, userDatails)
+	// }
+
+	var allUsers []UserAdmin
 	for rows.Next() {
 		var userId int
 		var userEmail string
@@ -101,9 +114,12 @@ func UserAdminShowUsers() ([][]string, error) {
 		if err != nil {
 			return nil, err
 		}
-		userDatails := []string{strconv.Itoa(userId), userEmail, userPw}
+		// userDatails := []string{strconv.Itoa(userId), userEmail, userPw}
+		userDatails := UserAdminNew(userId, userEmail, userPw)
 		allUsers = append(allUsers, userDatails)
 	}
+
+	fmt.Println(allUsers)
 
 	return allUsers, nil
 }

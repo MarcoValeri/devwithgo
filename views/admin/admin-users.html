@@ -5,12 +5,11 @@
 <div class="admin-users">
     {{ define "adminContent"}}
         <h2>All users</h2>
-        {{ range .UsersData }}
-            <p>User</p>
-            {{ range . }}
-                <p>{{ . }}</p>
-                <a href="">ID: {{ (index . 0) }}</a>
-            {{ end }}
+        {{ range .UserAdminData }}
+            <p>User ID: {{ .Id }}</p>
+            <p>Email: {{ .Email }}</p>
+            <p>Password: {{ .Password }}</p>
+            <a href="/admin/user-edit/{{ .Id }}">Edit</a>
             <br />
         {{ end }}
     {{end}}
