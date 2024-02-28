@@ -9,6 +9,7 @@
             <p>User</p>
             {{ range . }}
                 <p>{{ . }}</p>
+                <a href="">ID: {{ (index . 0) }}</a>
             {{ end }}
             <br />
         {{ end }}

@@ -5,5 +5,33 @@
 <div class="admin-users">
     {{ define "adminContent"}}
         <h2>Admin User Edit</h2>
+        {{ if .UsersData }}
+            {{ range .UsersData }}
+                <p>{{ . }}</p>
+            {{ end }}
+        {{ else }}
+        <p>No user has been selected</p>
+        {{ end }}
+        <div>
+            <h2>Edit This User</h2>
+            <form method="POST">
+                <div>
+                    <input type="text" name="user-admin-email-edit" placeholder="Email*">
+                    <span>{{.EmailError}}</span>
+                </div>
+                <div>
+                    <input type="text" name="user-admin-password-edit" placeholder="Password*">
+                    <span>{{.PasswordError}}</span>
+                </div>
+                <div>
+                    <input type="text" name="user-admin-password-repeat-edit" placeholder="Password*">
+                    <span>{{.PasswordRepearError}}</span>
+                    <span>{{.PasswordMatch}}</span>
+                </div>
+                <div>
+                    <input type="submit" name="user-admin-edit-submit" value="Edit this user">
+                </div>
+            </form>
+        </div>
     {{end}}
 </div>

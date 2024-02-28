@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -49,13 +50,13 @@ func AdminUserAdd() {
 		var areAdminUserInputsValid [5]bool
 		isFormSubmittionValid := false
 
-		// Get value form the form
+		// Get value from the form
 		getAdminUserEmail := r.FormValue("user-add-email")
 		getAdminUserPassword := r.FormValue("user-add-password")
 		getAdminUserPasswordRepeat := r.FormValue("user-add-password-repeat")
 		getAdminUserSubmit := r.FormValue("user-add-new-submit")
 
-		// Sanitize form input
+		// Sanitize form inputs
 		getAdminUserEmail = util.FormSanitizeStringInput(getAdminUserEmail)
 		getAdminUserPassword = util.FormSanitizeStringInput(getAdminUserPassword)
 		getAdminUserPasswordRepeat = util.FormSanitizeStringInput(getAdminUserPasswordRepeat)
@@ -134,8 +135,113 @@ func AdminUserAdd() {
 func AdminUserEdit() {
 	tmpl := template.Must(template.ParseFiles("./views/admin/templates/baseAdmin.html", "./views/admin/admin-user-edit.html"))
 	http.HandleFunc("/admin/user-edit/", func(w http.ResponseWriter, r *http.Request) {
-		id := strings.TrimPrefix(r.URL.Path, "/admin/user-edit/")
-		fmt.Println("id", id)
-		tmpl.Execute(w, nil)
+
+		idPath := strings.TrimPrefix(r.URL.Path, "/admin/user-edit/")
+		idPath = util.FormSanitizeStringInput(idPath)
+
+		userId, err := strconv.Atoi(idPath)
+		if err != nil {
+			fmt.Println("Error convertin string to integer:", err)
+			return
+		}
+
+		getUserEdit, err := models.UserAdminFindIt(userId)
+		if err != nil {
+			fmt.Println("Error to find user")
+		}
+
+		// Create data for the page
+		data := dataPage{
+			PageTitle: "Admin User Edit",
+			UsersData: getUserEdit,
+		}
+
+		/**
+		* Check if the form for editing the user has been submitted
+		* and
+		* validate the inputs
+		 */
+		var areAdminUserEditInputsValid [5]bool
+		isFormSubmittionValid := false
+
+		// Get value from the form
+		getAdminUserEmailEdit := r.FormValue("user-admin-email-edit")
+		getAdminUserPasswordEdit := r.FormValue("user-admin-password-edit")
+		getAdminUserPassordRepeatEdit := r.FormValue("user-admin-password-repeat-edit")
+		getAdminUserSubmitEdit := r.FormValue("user-admin-edit-submit")
+
+		// Sanitize form inputs
+		getAdminUserEmailEdit = util.FormSanitizeStringInput(getAdminUserEmailEdit)
+		getAdminUserPasswordEdit = util.FormSanitizeStringInput(getAdminUserPasswordEdit)
+		getAdminUserPassordRepeatEdit = util.FormSanitizeStringInput(getAdminUserPassordRepeatEdit)
+		getAdminUserSubmitEdit = util.FormSanitizeStringInput(getAdminUserSubmitEdit)
+
+		// Check if the form has been submitted
+		if getAdminUserSubmitEdit == "Edit this user" {
+			// Email validation
+			if util.FormEmailInput(getAdminUserEmailEdit) {
+				data.EmailError = ""
+				areAdminUserEditInputsValid[0] = true
+				if util.FormEmailLengthInput(getAdminUserEmailEdit) && areAdminUserEditInputsValid[0] {
+					data.EmailError = ""
+					areAdminUserEditInputsValid[0] = true
+				} else {
+					data.EmailError = "Email length is not valid"
+					areAdminUserEditInputsValid[0] = false
+				}
+			} else {
+				data.EmailError = "Email format is not valid"
+				areAdminUserEditInputsValid[0] = false
+			}
+		}
+
+		// Password validation
+		if util.FormPasswordInput(getAdminUserPasswordEdit) {
+			data.PasswordError = ""
+			areAdminUserEditInputsValid[1] = true
+		} else {
+			data.PasswordError = "Password should be between 8 to 20 characters"
+			areAdminUserEditInputsValid[1] = false
+		}
+
+		if util.FormPasswordInput(getAdminUserPassordRepeatEdit) {
+			data.PasswordRepearError = ""
+			areAdminUserEditInputsValid[2] = true
+		} else {
+			data.PasswordRepearError = "Password should be between 8 to 20 characters"
+			areAdminUserEditInputsValid[2] = false
+		}
+
+		if getAdminUserPasswordEdit == getAdminUserPassordRepeatEdit {
+			data.PasswordMatch = ""
+			areAdminUserEditInputsValid[3] = true
+		} else {
+			data.PasswordMatch = "Password and repeat password do not match"
+			areAdminUserEditInputsValid[3] = false
+		}
+
+		// Submit validation
+		if getAdminUserSubmitEdit == "Edit this user" {
+			areAdminUserEditInputsValid[4] = true
+		} else {
+			areAdminUserEditInputsValid[4] = false
+		}
+
+		for i := 0; i < len(areAdminUserEditInputsValid); i++ {
+			isFormSubmittionValid = true
+			if !areAdminUserEditInputsValid[i] {
+				isFormSubmittionValid = false
+				break
+			}
+		}
+
+		// Edit user if all inputs are valid and redirect to all user list
+		if isFormSubmittionValid {
+			editUserAdmin := models.UserAdminNew(userId, getAdminUserEmailEdit, getAdminUserPasswordEdit)
+			models.UserEdminEdit(editUserAdmin)
+			http.Redirect(w, r, "/admin/users", http.StatusSeeOther)
+		}
+
+		tmpl.Execute(w, data)
 	})
 }
