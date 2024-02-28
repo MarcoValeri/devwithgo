@@ -33,7 +33,7 @@ func UserAdminAddNewToDB(getNewUserAdmin UserAdmin) error {
 	return nil
 }
 
-func UserEdminEdit(getEditedUserAdmin UserAdmin) error {
+func UserAdminEdit(getEditedUserAdmin UserAdmin) error {
 	db := database.DatabaseConnection()
 	defer db.Close()
 
@@ -43,6 +43,20 @@ func UserEdminEdit(getEditedUserAdmin UserAdmin) error {
 		return err
 	}
 	defer query.Close()
+
+	return nil
+}
+
+func UserAdminDelete(getUserAdminId int) error {
+	db := database.DatabaseConnection()
+	defer db.Close()
+
+	rows, err := db.Query("DELETE FROM users WHERE id=?", getUserAdminId)
+	if err != nil {
+		fmt.Println("Error, not able to delete this user:", err)
+		return err
+	}
+	defer rows.Close()
 
 	return nil
 }

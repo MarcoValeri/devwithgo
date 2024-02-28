@@ -9,5 +9,6 @@ func AdminController() {
 
 	admincontrollers.AdminUsers()
 	admincontrollers.AdminUserAdd()
+	admincontrollers.AdminUserDelete()
 	admincontrollers.AdminUserEdit()
 }

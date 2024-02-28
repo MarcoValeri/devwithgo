@@ -10,6 +10,7 @@
             <p>Email: {{ .Email }}</p>
             <p>Password: {{ .Password }}</p>
             <a href="/admin/user-edit/{{ .Id }}">Edit</a>
+            <a href="/admin/user-delete/{{ .Id }}">Delete</a>
             <br />
         {{ end }}
     {{end}}

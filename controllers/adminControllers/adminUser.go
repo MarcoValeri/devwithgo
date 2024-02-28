@@ -146,7 +146,7 @@ func AdminUserEdit() {
 
 		getUserEdit, err := models.UserAdminFindIt(userId)
 		if err != nil {
-			fmt.Println("Error to find user")
+			fmt.Println("Error to find user:", err)
 		}
 
 		// Create data for the page
@@ -237,7 +237,59 @@ func AdminUserEdit() {
 		// Edit user if all inputs are valid and redirect to all user list
 		if isFormSubmittionValid {
 			editUserAdmin := models.UserAdminNew(userId, getAdminUserEmailEdit, getAdminUserPasswordEdit)
-			models.UserEdminEdit(editUserAdmin)
+			models.UserAdminEdit(editUserAdmin)
+			http.Redirect(w, r, "/admin/users", http.StatusSeeOther)
+		}
+
+		tmpl.Execute(w, data)
+	})
+}
+
+func AdminUserDelete() {
+	tmpl := template.Must(template.ParseFiles("./views/admin/templates/baseAdmin.html", "./views/admin/admin-user-delete.html"))
+	http.HandleFunc("/admin/user-delete/", func(w http.ResponseWriter, r *http.Request) {
+
+		idPath := strings.TrimPrefix(r.URL.Path, "/admin/user-delete/")
+		idPath = util.FormSanitizeStringInput(idPath)
+
+		userId, err := strconv.Atoi(idPath)
+		if err != nil {
+			fmt.Println("Error convertinf string to integer:", err)
+			return
+		}
+
+		getUserDelete, err := models.UserAdminFindIt(userId)
+		if err != nil {
+			fmt.Println("Error to find the user:", err)
+		}
+
+		// Create data for the page
+		data := dataPage{
+			PageTitle:     "Admin User Delete",
+			UserAdminData: getUserDelete,
+		}
+
+		/**
+		* Check if the form for deleting user has
+		* been submitted
+		* and
+		* delete the selected user
+		 */
+		isFormSubmittionValid := false
+
+		// Get value from the form
+		getAdminUserDeleteSubmit := r.FormValue("admin-user-delete")
+
+		// Sanitize form inputs
+		getAdminUserDeleteSubmit = util.FormSanitizeStringInput(getAdminUserDeleteSubmit)
+
+		// Check if the form has been submitted
+		if getAdminUserDeleteSubmit == "Delete this user" {
+			isFormSubmittionValid = true
+		}
+
+		if isFormSubmittionValid {
+			models.UserAdminDelete(userId)
 			http.Redirect(w, r, "/admin/users", http.StatusSeeOther)
 		}
 
