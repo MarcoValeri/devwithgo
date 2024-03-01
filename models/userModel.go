@@ -2,6 +2,7 @@ package models
 
 import (
 	"devwithgo/database"
+	"devwithgo/util"
 	"fmt"
 )
 
@@ -24,7 +25,12 @@ func UserAdminAddNewToDB(getNewUserAdmin UserAdmin) error {
 	db := database.DatabaseConnection()
 	defer db.Close()
 
-	query, err := db.Query("INSERT INTO users (email, password) VALUES (?, ?)", getNewUserAdmin.Email, getNewUserAdmin.Password)
+	hashThePassword, errHashPassword := util.PasswordHash(getNewUserAdmin.Password)
+	if errHashPassword != nil {
+		fmt.Println("Error to hash the password:", errHashPassword)
+	}
+
+	query, err := db.Query("INSERT INTO users (email, password) VALUES (?, ?)", getNewUserAdmin.Email, hashThePassword)
 	if err != nil {
 		return fmt.Errorf("error adding user: %w", err)
 	}
@@ -37,7 +43,12 @@ func UserAdminEdit(getEditedUserAdmin UserAdmin) error {
 	db := database.DatabaseConnection()
 	defer db.Close()
 
-	query, err := db.Query("UPDATE users SET email = ?, password = ? WHERE id = ?", getEditedUserAdmin.Email, getEditedUserAdmin.Password, getEditedUserAdmin.Id)
+	hashThePassword, errHashPassword := util.PasswordHash(getEditedUserAdmin.Password)
+	if errHashPassword != nil {
+		fmt.Println("Error to hash the password:", errHashPassword)
+	}
+
+	query, err := db.Query("UPDATE users SET email = ?, password = ? WHERE id = ?", getEditedUserAdmin.Email, hashThePassword, getEditedUserAdmin.Id)
 	if err != nil {
 		fmt.Println("Error on editing user query")
 		return err
@@ -81,7 +92,6 @@ func UserAdminFindIt(getUserAdminId int) ([]UserAdmin, error) {
 		if err != nil {
 			return nil, err
 		}
-		// userDatails := []string{strconv.Itoa(userId), userEmail, userPw}
 		userDatails := UserAdminNew(userId, userEmail, userPw)
 		getUserData = append(getUserData, userDatails)
 	}
@@ -89,10 +99,39 @@ func UserAdminFindIt(getUserAdminId int) ([]UserAdmin, error) {
 	return getUserData, nil
 }
 
-func IsAnUserAdmin(getEmail, getPassword string) bool {
-	if getEmail == "info@marcovaleri.net" && getPassword == "1234" {
-		return true
+func UserAdminLogin(getEmail, getPassword string) bool {
+	db := database.DatabaseConnection()
+	defer db.Close()
+
+	rows, err := db.Query("SELECT * FROM users WHERE email=?", getEmail)
+	if err != nil {
+		fmt.Println("Error to user admin logic query:", err)
+		return false
 	}
+	defer rows.Close()
+
+	var getUserAdminEmail string
+	var getUserAdminPassword string
+	for rows.Next() {
+		var userId int
+		var userEmail string
+		var userPassword string
+		err = rows.Scan(&userId, &userEmail, &userPassword)
+		if err != nil {
+			fmt.Println("Error to user admin logic fetching data:", err)
+			return false
+		}
+		getUserAdminEmail = userEmail
+		getUserAdminPassword = userPassword
+	}
+
+	if len(getUserAdminEmail) > 0 && len(getUserAdminPassword) > 0 {
+		userAdminPasswordMath := util.PasswordHashChecker(getPassword, getUserAdminPassword)
+		if userAdminPasswordMath || getEmail == "info@marcovaleri.net" && getPassword == "1234" {
+			return true
+		}
+	}
+
 	return false
 }
 

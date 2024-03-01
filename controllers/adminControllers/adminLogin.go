@@ -46,7 +46,7 @@ func AdminLogin() {
 			}
 
 			// Form validation
-			if models.IsAnUserAdmin(getEmail, getPassword) {
+			if models.UserAdminLogin(getEmail, getPassword) {
 				http.Redirect(w, r, "/admin/dashboard", http.StatusSeeOther)
 			} else {
 				setLoginValidation.EmailValidation = "Error: email and password are not valid"
