@@ -3,14 +3,26 @@ package admincontrollers
 import (
 	"devwithgo/models"
 	"devwithgo/util"
+	"fmt"
 	"html/template"
 	"net/http"
+	"os"
+
+	"github.com/gorilla/sessions"
 )
 
 type LoginValidation struct {
 	EmailValidation    string
 	PasswordValidation string
 }
+
+// Initialize the session
+var (
+	key   = []byte("super-secret-key")
+	store = sessions.NewCookieStore(key)
+)
+
+// var store = sessions.NewCookieStore([]byte(os.Getenv("SESSION_KEY_LOGIN")))
 
 func AdminLogin() {
 	tmpl := template.Must(template.ParseFiles("./views/admin/admin-login.html"))
@@ -20,6 +32,16 @@ func AdminLogin() {
 			EmailValidation:    "",
 			PasswordValidation: "",
 		}
+
+		// Session authentication
+		session, errSession := store.Get(r, "session-authentication")
+		if errSession != nil {
+			fmt.Println("Error on session-authentication:", errSession)
+		}
+		session.Values["user-admin-authentication"] = true
+		session.Save(r, w)
+		fmt.Println(session.Values["user-admin-authentication"])
+		fmt.Println(os.Getenv("SESSION_KEY_LOGIN"))
 
 		// FORM validation
 		getEmail := r.FormValue("email")
@@ -47,6 +69,8 @@ func AdminLogin() {
 
 			// Form validation
 			if models.UserAdminLogin(getEmail, getPassword) {
+				// TODO: create login session
+
 				http.Redirect(w, r, "/admin/dashboard", http.StatusSeeOther)
 			} else {
 				setLoginValidation.EmailValidation = "Error: email and password are not valid"
