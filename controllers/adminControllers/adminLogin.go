@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/gorilla/securecookie"
 	"github.com/gorilla/sessions"
 )
 
@@ -17,12 +18,13 @@ type LoginValidation struct {
 }
 
 // Initialize the session
-var (
-	key   = []byte("super-secret-key")
-	store = sessions.NewCookieStore(key)
-)
-
-// var store = sessions.NewCookieStore([]byte(os.Getenv("SESSION_KEY_LOGIN")))
+// var (
+//
+//	key   = []byte("super-secret-key")
+//	store = sessions.NewCookieStore(key)
+//
+// )
+var store = sessions.NewCookieStore(securecookie.GenerateRandomKey(32), securecookie.GenerateRandomKey(32))
 
 func AdminLogin() {
 	tmpl := template.Must(template.ParseFiles("./views/admin/admin-login.html"))
