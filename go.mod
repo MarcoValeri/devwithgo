@@ -15,5 +15,6 @@ require (
 	github.com/gorilla/css v1.0.0 // indirect
 	github.com/gorilla/securecookie v1.1.2 // indirect
 	github.com/gorilla/sessions v1.2.2 // indirect
+	github.com/platformsh/gohelper v1.0.0 // indirect
 	golang.org/x/net v0.21.0 // indirect
 )
