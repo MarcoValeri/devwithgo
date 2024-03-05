@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"os"
 
 	"github.com/gorilla/securecookie"
 	"github.com/gorilla/sessions"
@@ -18,12 +17,6 @@ type LoginValidation struct {
 }
 
 // Initialize the session
-// var (
-//
-//	key   = []byte("super-secret-key")
-//	store = sessions.NewCookieStore(key)
-//
-// )
 var store = sessions.NewCookieStore(securecookie.GenerateRandomKey(32), securecookie.GenerateRandomKey(32))
 
 func AdminLogin() {
@@ -40,10 +33,8 @@ func AdminLogin() {
 		if errSession != nil {
 			fmt.Println("Error on session-authentication:", errSession)
 		}
-		session.Values["user-admin-authentication"] = true
+		session.Values["user-admin-authentication"] = false
 		session.Save(r, w)
-		fmt.Println(session.Values["user-admin-authentication"])
-		fmt.Println(os.Getenv("SESSION_KEY_LOGIN"))
 
 		// FORM validation
 		getEmail := r.FormValue("email")
@@ -71,12 +62,14 @@ func AdminLogin() {
 
 			// Form validation
 			if models.UserAdminLogin(getEmail, getPassword) {
-				// TODO: create login session
-
+				session.Values["user-admin-authentication"] = true
+				session.Save(r, w)
 				http.Redirect(w, r, "/admin/dashboard", http.StatusSeeOther)
 			} else {
 				setLoginValidation.EmailValidation = "Error: email and password are not valid"
 				setLoginValidation.PasswordValidation = "Error: email and password are not valid"
+				session.Values["user-admin-authentication"] = false
+				session.Save(r, w)
 			}
 		}
 

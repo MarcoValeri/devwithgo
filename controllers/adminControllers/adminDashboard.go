@@ -10,18 +10,15 @@ func AdminDashboard() {
 	tmpl := template.Must(template.ParseFiles("./views/admin/templates/baseAdmin.html", "./views/admin/admin-dashboard.html"))
 	http.HandleFunc("/admin/dashboard", func(w http.ResponseWriter, r *http.Request) {
 
-		// Session
 		session, errSession := store.Get(r, "session-authentication")
 		if errSession != nil {
 			fmt.Println("Error on session-authentication:", errSession)
 		}
 		if session.Values["user-admin-authentication"] == true {
-			fmt.Println("TRUE")
+			data := "Admin Dashboard"
+			tmpl.Execute(w, data)
 		} else {
-			fmt.Println("FALSE")
+			http.Redirect(w, r, "/admin/login", http.StatusSeeOther)
 		}
-
-		data := "Admin Dashboard"
-		tmpl.Execute(w, data)
 	})
 }
