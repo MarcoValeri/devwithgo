@@ -127,7 +127,7 @@ func UserAdminLogin(getEmail, getPassword string) bool {
 
 	if len(getUserAdminEmail) > 0 && len(getUserAdminPassword) > 0 {
 		userAdminPasswordMath := util.PasswordHashChecker(getPassword, getUserAdminPassword)
-		if userAdminPasswordMath || getEmail == "info@marcovaleri.net" && getPassword == "1234" {
+		if userAdminPasswordMath {
 			return true
 		}
 	}
