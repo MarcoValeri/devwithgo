@@ -17,7 +17,7 @@ var dbLocal *sql.DB
 
 func DatabaseConnection() *sql.DB {
 
-	flag := "platform"
+	flag := "local"
 
 	if flag == "local" {
 		return databaseConnectionLocal()

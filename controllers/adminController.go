@@ -13,4 +13,7 @@ func AdminController() {
 	admincontrollers.AdminUserAdd()
 	admincontrollers.AdminUserDelete()
 	admincontrollers.AdminUserEdit()
+
+	admincontrollers.AdminGuides()
+	admincontrollers.AdminGuideAdd()
 }

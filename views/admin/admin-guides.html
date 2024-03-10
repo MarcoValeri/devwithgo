@@ -1,0 +1,14 @@
+{{template "baseAdmin" .}}
+
+{{define "title"}}{{ .PageTitle }}{{end}}
+
+<div class="admin-users">
+    {{ define "adminContent"}}
+        <h2>Admin Guides</h2>
+        {{ if .Guides }}
+            <h4>Show guides</h4>
+        {{ else }}
+            <h4>No guides found</h4>
+        {{ end }}
+    {{end}}
+</div>

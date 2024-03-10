@@ -1,0 +1,32 @@
+{{template "baseAdmin" .}}
+
+{{define "title"}}{{ .PageTitle }}{{end}}
+
+<div class="admin-users">
+    {{ define "adminContent"}}
+        <h2>Admin Guide Add</h2>
+        <form method="POST">
+            <div>
+                <input type="text" name="guide-title" placeholder="Title*" required />
+            </div>
+            <div>
+                <input type="text" name="guide-description" placeholder="Description*" required />
+            </div>
+            <div>
+                <input type="text" name="guide-url" placeholder="URL*" required />
+            </div>
+            <div>
+                <input type="date" name="guide-published" required />
+            </div>
+            <div>
+                <input type="date" name="guide-updated" required />
+            </div>
+            <div>
+                <textarea name="guide-content"></textarea>
+            </div>
+            <div>
+                <input type="submit" name="guide-add" value="Add" />
+            </div>
+        </form>
+    {{end}}
+</div>
