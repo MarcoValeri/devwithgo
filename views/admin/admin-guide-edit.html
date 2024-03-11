@@ -17,28 +17,22 @@
                     <h2>Edit this user</h2>
                     <form method="POST">
                         <div>
-                            <input type="text" name="guide-title-edit" value="{{ .Title }}" placeholder="Title*"  />
-                            <span>{{ .TitleError }}</span>
+                            <input type="text" name="guide-title-edit" value="{{ .Title }}" placeholder="Title*" />
                         </div>
                         <div>
                             <input type="text" name="guide-description-edit" value="{{ .Description }}" placeholder="Description*" />
-                            <span>{{ .DescriptionError }}</span>
                         </div>
                         <div>
                             <input type="text" name="guide-url-edit" value="{{ .Url }}" placeholder="URL*" />
-                            <span>{{ .UrlError }}</span>
                         </div>
                         <div>
                             <input type="datetime-local" name="guide-published-edit" value="{{ .Published }}" placeholder="Published*" />
-                            <span>{{ .PublishedError }}</span>
                         </div>
                         <div>
                             <input type="datetime-local" name="guide-updated-edit" value="{{ .Updated }}" placeholder="Updated*" />
-                            <span>{{ .UpdatedError }}</span>
                         </div>
                         <div>
                             <textarea name="guide-content-edit">{{ .Content }}</textarea>
-                            <span>{{ .ContentErorr }}</span>
                         </div>
                         <div>
                             <input type="submit" name="guide-edit" value="Edit this guide" />

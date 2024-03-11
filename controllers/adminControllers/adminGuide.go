@@ -17,7 +17,7 @@ type guideData struct {
 	UrlError         string
 	PublishedError   string
 	UpdatedError     string
-	ContentErorr     string
+	ContentError     string
 	Guides           []models.Guide
 }
 
@@ -57,7 +57,6 @@ func AdminGuideAdd() {
 			fmt.Println("Error on session-authentication:", errSession)
 		}
 		if session.Values["user-admin-authentication"] == true {
-			// TODO: get and show all guides
 			data := guideData{
 				PageTitle: "Guide Add",
 			}
@@ -132,10 +131,10 @@ func AdminGuideAdd() {
 
 				// Content validation
 				if len(getAdminGuideContent) > 0 {
-					data.ContentErorr = ""
+					data.ContentError = ""
 					areAdminGuideInputsValid[5] = true
 				} else {
-					data.ContentErorr = "Add the content"
+					data.ContentError = "Add the content"
 					areAdminGuideInputsValid[5] = false
 				}
 
@@ -197,8 +196,9 @@ func AdminGuideEdit() {
 
 			// Create data for the page
 			data := guideData{
-				PageTitle: "Admin Guide Edit",
-				Guides:    getGuideEdit,
+				PageTitle:  "Admin Guide Edit",
+				TitleError: "",
+				Guides:     getGuideEdit,
 			}
 
 			/**
@@ -275,10 +275,10 @@ func AdminGuideEdit() {
 
 				// Content validation
 				if len(getAdminGuideContentEdit) > 0 {
-					data.ContentErorr = ""
+					data.ContentError = ""
 					areAdmingGuideEditInputsValid[5] = true
 				} else {
-					data.ContentErorr = "Add the content"
+					data.ContentError = "Add the content"
 					areAdmingGuideEditInputsValid[5] = false
 				}
 
