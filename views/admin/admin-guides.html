@@ -6,7 +6,18 @@
     {{ define "adminContent"}}
         <h2>Admin Guides</h2>
         {{ if .Guides }}
-            <h4>Show guides</h4>
+            {{ range .Guides }}
+                <p>Guide ID: {{ .Id }}</p>
+                <p>Guide Title: {{ .Title }}</p>
+                <p>Guide Description: {{ .Description }}</p>
+                <p>Guide URL: {{ .Url }}</p>
+                <p>Guide Published: {{ .Published }}</p>
+                <p>Guide Updated: {{ .Updated }}</p>
+                <p>Guide Content:</p>
+                {{ .Content }}
+                <br />
+                <hr>
+            {{ end }}
         {{ else }}
             <h4>No guides found</h4>
         {{ end }}
