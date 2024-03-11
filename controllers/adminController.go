@@ -16,4 +16,5 @@ func AdminController() {
 
 	admincontrollers.AdminGuides()
 	admincontrollers.AdminGuideAdd()
+	admincontrollers.AdminGuideEdit()
 }

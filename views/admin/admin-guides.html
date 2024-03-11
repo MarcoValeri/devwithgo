@@ -13,8 +13,8 @@
                 <p>Guide URL: {{ .Url }}</p>
                 <p>Guide Published: {{ .Published }}</p>
                 <p>Guide Updated: {{ .Updated }}</p>
-                <p>Guide Content:</p>
-                {{ .Content }}
+                <a href="/admin/guide-edit/{{ .Id }}">Edit</a>
+                <br />
                 <br />
                 <hr>
             {{ end }}

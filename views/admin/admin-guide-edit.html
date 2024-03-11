@@ -1,0 +1,53 @@
+{{template "baseAdmin" .}}
+
+{{define "title"}}{{ .PageTitle }}{{end}}
+
+<div class="admin-users">
+    {{ define "adminContent"}}
+        <h2>Admin Guide Edit</h2>
+        {{ if .Guides }}
+            {{ range .Guides }}
+                <p>Guide ID: {{ .Id }}</p>
+                <p>Guide Title: {{ .Title }}</p>
+                <p>Guide Description: {{ .Description }}</p>
+                <p>Guide URL: {{ .Url }}</p>
+                <p>Guide Published: {{ .Published }}</p>
+                <p>Guide Updated: {{ .Updated }}</p>
+                <div>
+                    <h2>Edit this user</h2>
+                    <form method="POST">
+                        <div>
+                            <input type="text" name="guide-title-edit" value="{{ .Title }}" placeholder="Title*"  />
+                            <span>{{ .TitleError }}</span>
+                        </div>
+                        <div>
+                            <input type="text" name="guide-description-edit" value="{{ .Description }}" placeholder="Description*" />
+                            <span>{{ .DescriptionError }}</span>
+                        </div>
+                        <div>
+                            <input type="text" name="guide-url-edit" value="{{ .Url }}" placeholder="URL*" />
+                            <span>{{ .UrlError }}</span>
+                        </div>
+                        <div>
+                            <input type="datetime-local" name="guide-published-edit" value="{{ .Published }}" placeholder="Published*" />
+                            <span>{{ .PublishedError }}</span>
+                        </div>
+                        <div>
+                            <input type="datetime-local" name="guide-updated-edit" value="{{ .Updated }}" placeholder="Updated*" />
+                            <span>{{ .UpdatedError }}</span>
+                        </div>
+                        <div>
+                            <textarea name="guide-content-edit">{{ .Content }}</textarea>
+                            <span>{{ .ContentErorr }}</span>
+                        </div>
+                        <div>
+                            <input type="submit" name="guide-edit" value="Edit this guide" />
+                        </div>
+                    </form>
+                </div>
+            {{ end }}
+        {{ else }}
+            <h4>No guide found</h4>
+        {{ end }}
+    {{end}}
+</div>
