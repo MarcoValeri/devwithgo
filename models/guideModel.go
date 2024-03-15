@@ -58,6 +58,21 @@ func GuideEdit(getGuide Guide) error {
 	return nil
 }
 
+func GuideDelete(getGuideId int) error {
+	db := database.DatabaseConnection()
+	defer db.Close()
+
+	rows, err := db.Query("DELETE FROM guides WHERE id=?", getGuideId)
+	if err != nil {
+		fmt.Println("Error, not able to delete this guide:", err)
+		return err
+	}
+
+	defer rows.Close()
+
+	return nil
+}
+
 func GuideFindIt(getGuideId int) ([]Guide, error) {
 	db := database.DatabaseConnection()
 	defer db.Close()

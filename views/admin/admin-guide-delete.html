@@ -4,7 +4,7 @@
 
 <div class="admin-users">
     {{ define "adminContent"}}
-        <h2>Admin Guides</h2>
+        <h2>Admin Guide Delete</h2>
         {{ if .Guides }}
             {{ range .Guides }}
                 <p>Guide ID: {{ .Id }}</p>
@@ -13,14 +13,14 @@
                 <p>Guide URL: {{ .Url }}</p>
                 <p>Guide Published: {{ .Published }}</p>
                 <p>Guide Updated: {{ .Updated }}</p>
-                <a href="/admin/guide-edit/{{ .Id }}">Edit</a>
-                <a href="/admin/guide-delete/{{ .Id }}">Delete</a>
-                <br />
-                <br />
-                <hr>
             {{ end }}
+            <h4>Do you want to delete this guide?</h4>
+            <form method="POST">
+                <input type="submit" name="admin-guide-delete" value="Delete this guide" />
+            </form>
+            <a href="/admin/guides">Come back to all guides</a>
         {{ else }}
-            <h4>No guides found</h4>
+            <h4>No guide found</h4>
         {{ end }}
     {{end}}
 </div>

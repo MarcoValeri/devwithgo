@@ -40,6 +40,14 @@
                     </form>
                 </div>
             {{ end }}
+            <div>
+                <p>{{ .TitleError }}</p>
+                <p>{{ .DescriptionError }}</p>
+                <p>{{ .UrlError }}</p>
+                <p>{{ .PublishedError }}</p>
+                <p>{{ .UpdatedError }}</p>
+                <p>{{ .ContentError }}</p>
+            </div>
         {{ else }}
             <h4>No guide found</h4>
         {{ end }}

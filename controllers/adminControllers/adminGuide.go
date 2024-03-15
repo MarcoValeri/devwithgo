@@ -305,3 +305,63 @@ func AdminGuideEdit() {
 
 	})
 }
+
+func AdminGuideDelete() {
+	tmpl := template.Must(template.ParseFiles("./views/admin/templates/baseAdmin.html", "./views/admin/admin-guide-delete.html"))
+	http.HandleFunc("/admin/guide-delete/", func(w http.ResponseWriter, r *http.Request) {
+
+		session, errSession := store.Get(r, "session-authentication")
+		if errSession != nil {
+			fmt.Println("Error on session-authentication:", errSession)
+		}
+		if session.Values["user-admin-authentication"] == true {
+			idPath := strings.TrimPrefix(r.URL.Path, "/admin/guide-delete/")
+			idPath = util.FormSanitizeStringInput(idPath)
+
+			guideId, err := strconv.Atoi(idPath)
+			if err != nil {
+				fmt.Println("Error converting string to integert:", err)
+				return
+			}
+
+			getGuideDelete, err := models.GuideFindIt(guideId)
+			if err != nil {
+				fmt.Println("Error to find the user:", err)
+			}
+
+			data := guideData{
+				PageTitle: "Admin Delete Guide",
+				Guides:    getGuideDelete,
+			}
+
+			/**
+			* Check if the form for deleting user has
+			* been submitted
+			* and
+			* delete the selected user
+			 */
+			isFormSubmittionValid := false
+
+			// Get the value from the form
+			getAdminGuideDeleteSubmit := r.FormValue("admin-guide-delete")
+
+			// Sanitize form input
+			getAdminGuideDeleteSubmit = util.FormSanitizeStringInput(getAdminGuideDeleteSubmit)
+
+			// Check if the form has been submitted
+			if getAdminGuideDeleteSubmit == "Delete this guide" {
+				isFormSubmittionValid = true
+			}
+
+			if isFormSubmittionValid {
+				models.GuideDelete(guideId)
+				http.Redirect(w, r, "/admin/guides", http.StatusSeeOther)
+			}
+
+			tmpl.Execute(w, data)
+		} else {
+			http.Redirect(w, r, "/admin/login", http.StatusSeeOther)
+		}
+
+	})
+}
