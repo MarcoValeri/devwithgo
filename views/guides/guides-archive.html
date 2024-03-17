@@ -1,0 +1,25 @@
+{{template "base" .}}
+
+{{define "title"}}{{.PageTitle}}{{end}}
+
+{{ define "content"}}
+<div>
+    <h2>Guides archive</h2>
+    {{ if .Guides }}
+            {{ range .Guides }}
+                <p>Guide ID: {{ .Id }}</p>
+                <p>Guide Title: {{ .Title }}</p>
+                <p>Guide Description: {{ .Description }}</p>
+                <p>Guide URL: {{ .Url }}</p>
+                <p>Guide Published: {{ .Published }}</p>
+                <p>Guide Updated: {{ .Updated }}</p>
+                <a href="/guide/{{ .Url }}">Link</a>
+                <br />
+                <br />
+                <hr>
+            {{ end }}
+        {{ else }}
+            <h4>No guide found</h4>
+        {{ end }}
+</div>
+{{end}}

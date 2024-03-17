@@ -79,7 +79,7 @@ func GuideFindIt(getGuideId int) ([]Guide, error) {
 
 	rows, err := db.Query("SELECT * FROM guides WHERE id=?", getGuideId)
 	if err != nil {
-		fmt.Println("Error on the user query")
+		fmt.Println("Error on the guide query")
 		return nil, err
 	}
 	defer rows.Close()
@@ -107,6 +107,46 @@ func GuideFindIt(getGuideId int) ([]Guide, error) {
 			guideContent,
 		)
 		getGuideData = append(getGuideData, guideDatails)
+	}
+
+	return getGuideData, nil
+}
+
+func GuideFindByUrl(getGuideUrl string) (Guide, error) {
+	db := database.DatabaseConnection()
+	defer db.Close()
+
+	var getGuideData Guide
+
+	rows, err := db.Query("SELECT * FROM guides WHERE url=?", getGuideUrl)
+	if err != nil {
+		fmt.Println("Error on the guide query")
+		return getGuideData, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var guideId int
+		var guideTitle string
+		var guideDescription string
+		var guideUrl string
+		var guidePublished string
+		var guideUpdated string
+		var guideContent string
+		err = rows.Scan(&guideId, &guideTitle, &guideDescription, &guideUrl, &guidePublished, &guideUpdated, &guideContent)
+		if err != nil {
+			return getGuideData, err
+		}
+		getGuideData = GuideNew(
+			guideId,
+			guideTitle,
+			guideDescription,
+			guideUrl,
+			guidePublished,
+			guideUpdated,
+			guideContent,
+		)
+
 	}
 
 	return getGuideData, nil
