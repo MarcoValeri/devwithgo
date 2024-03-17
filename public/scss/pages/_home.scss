@@ -2,7 +2,11 @@
     height: 50vh;
     padding: 5rem;
 
-    &__container-content {
+    &__guide-title {
+        margin-bottom: 2rem;
+    }
+
+    &__container-guide {
         text-align: center;
     }
 }

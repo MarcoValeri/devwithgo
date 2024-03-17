@@ -40,6 +40,20 @@
 html {
   font-size: 62.5%; }
 
+.button {
+  font-size: 2rem;
+  font-weight: 900;
+  text-decoration: none;
+  color: #000;
+  background-color: #00add8;
+  padding: 1rem 2rem;
+  border-radius: 0 25px 0 25px; }
+  .button:hover {
+    color: #00add8;
+    background-color: #fff;
+    box-shadow: 10px 5px 5px #00add8;
+    border: 1px solid #00add8; }
+
 .h1 {
   font-size: 4rem; }
 
@@ -67,12 +81,34 @@ html {
 .p-sm {
   font-size: 1.4rem; }
 
+.link-no {
+  color: #000;
+  text-decoration: none; }
+
 .header {
-  padding: 5rem;
+  padding: 2rem 2rem 5rem 2rem;
   background-color: #00add8; }
+  .header__nav {
+    text-align: center;
+    margin-bottom: 3rem; }
+  .header__nav-menu {
+    list-style: none; }
+  .header__nav-menu-item {
+    display: inline-block;
+    padding: 2rem; }
   .header__container-content {
     text-align: center;
     margin: auto; }
+  .header__logo {
+    font-size: 10rem; }
+    @media only screen and (max-width: 575px) {
+      .header__logo {
+        font-size: 6rem; } }
+  .header__title {
+    font-size: 6rem; }
+    @media only screen and (max-width: 575px) {
+      .header__title {
+        font-size: 3rem; } }
 
 .footer {
   display: flex;
@@ -89,5 +125,7 @@ html {
 .home {
   height: 50vh;
   padding: 5rem; }
-  .home__container-content {
+  .home__guide-title {
+    margin-bottom: 2rem; }
+  .home__container-guide {
     text-align: center; }

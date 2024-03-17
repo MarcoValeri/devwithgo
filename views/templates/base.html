@@ -8,12 +8,19 @@
 </head>
 <body>
     <header class="header">
-        <nav>
-            <li><a href="/guides/guides-all-content">Guides</a></li>
+        <nav class="header__nav">
+            <ul class="header__nav-menu">
+                <li class="header__nav-menu-item">
+                    <a class="link-no p-lg" href="/">Home</a>
+                </li>
+                <li class="header__nav-menu-item">
+                    <a class="link-no p-lg" href="/guides/guides-all-content">Guides</a>
+                </li>
+            </ul>
         </nav>
         <div class="header__container-content">
-            <h1 class="h1">Dev With GO</h1>
-            <h2 class="h2">{{.PageTitle}}</h2>
+            <h1 class="header__logo">Dev With GO</h1>
+            <h2 class="header__title">{{.PageTitle}}</h2>
         </div>
     </header>
     <main>

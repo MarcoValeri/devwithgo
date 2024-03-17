@@ -1,9 +1,39 @@
 .header {
-    padding: 5rem;
+    padding: 2rem 2rem 5rem 2rem;
     background-color: $blueGO;
+
+    &__nav {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    &__nav-menu {
+        list-style: none;
+    }
+
+    &__nav-menu-item {
+        display: inline-block;
+        padding: 2rem;
+    }
 
     &__container-content {
         text-align: center;
         margin: auto;
+    }
+
+    &__logo {
+        font-size: 10rem;
+
+        @include respond("sm") {
+            font-size: 6rem;
+        }
+    }
+
+    &__title {
+        font-size: 6rem;
+
+        @include respond("sm") {
+            font-size: 3rem;
+        }
     }
 }
