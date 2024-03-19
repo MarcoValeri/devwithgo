@@ -47,7 +47,8 @@ html {
   color: #000;
   background-color: #00add8;
   padding: 1rem 2rem;
-  border-radius: 0 25px 0 25px; }
+  border-radius: 0 25px 0 25px;
+  transition: .5s; }
   .button:hover {
     color: #00add8;
     background-color: #fff;
@@ -123,9 +124,28 @@ html {
     color: #d00; }
 
 .home {
-  height: 50vh;
+  height: auto;
+  min-height: 50vh;
   padding: 5rem; }
+  @media only screen and (max-width: 767px) {
+    .home {
+      padding: 5rem 2rem; } }
+  .home__container-guide {
+    max-width: 80%;
+    text-align: center;
+    padding: 5rem;
+    margin: 0 auto;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border: 1px solid #00add8;
+    border-radius: 5px; }
+    @media only screen and (max-width: 991px) {
+      .home__container-guide {
+        max-width: 90%; } }
+    @media only screen and (max-width: 767px) {
+      .home__container-guide {
+        max-width: 100%;
+        padding: 5rem 2rem; } }
   .home__guide-title {
     margin-bottom: 2rem; }
-  .home__container-guide {
-    text-align: center; }
+  .home__guide-description {
+    margin-bottom: 4rem; }

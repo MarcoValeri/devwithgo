@@ -18,4 +18,6 @@ func AdminController() {
 	admincontrollers.AdminGuideAdd()
 	admincontrollers.AdminGuideDelete()
 	admincontrollers.AdminGuideEdit()
+
+	admincontrollers.AdminUploadImage()
 }
