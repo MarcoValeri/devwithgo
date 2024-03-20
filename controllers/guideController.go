@@ -19,7 +19,7 @@ type GuideData struct {
 
 func GuidesArchive() {
 	tmpl := template.Must(template.ParseFiles("./views/templates/base.html", "./views/guides/guides-archive.html"))
-	http.HandleFunc("/guides/guides-all-content", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/guides/guides", func(w http.ResponseWriter, r *http.Request) {
 
 		// Get all the guides
 		getAllGuides, err := models.GuideShowGuides()

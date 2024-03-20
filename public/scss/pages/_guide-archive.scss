@@ -1,0 +1,24 @@
+.guide-archive {
+    padding: 5rem;
+
+    @include respond("md") {
+        padding: 5rem 1rem;
+    }
+
+    &__container-title {
+        text-align: center;
+    }
+
+    &__container-articles {
+        padding: 5rem 10rem;
+
+        @include respond("md") {
+            padding: 5rem 3rem;
+        }
+    }
+
+    &__menu-item {
+        color: $blueGO;
+        margin-bottom: 1rem;
+    }
+}

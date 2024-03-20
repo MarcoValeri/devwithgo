@@ -85,21 +85,24 @@ func AdminGuideAdd() {
 			// Check if the form has been submitted
 			if getAdminGuideAdd == "Add new guide" {
 				// Title validation
-				if len(getAdminGuideTitle) > 0 && len(getAdminGuideTitle) < 60 {
+				if len(getAdminGuideTitle) > 0 {
 					data.TitleError = ""
 					areAdminGuideInputsValid[0] = true
 				} else {
-					data.TitleError = "Title should be between 1 to 60 charactes"
+					data.TitleError = "Title should be between longher than 0"
 					areAdminGuideInputsValid[0] = false
 				}
 
 				// Description validation
-				if len(getAdminGuideDescription) > 0 && len(getAdminGuideDescription) < 160 {
+				if len(getAdminGuideDescription) > 0 && len(getAdminGuideDescription) < 200 {
 					data.DescriptionError = ""
 					areAdminGuideInputsValid[1] = true
 				} else {
-					data.DescriptionError = "Description should be between 1 t0 160 charactes"
+					data.DescriptionError = "Description should be between 1 to 160 charactes"
 					areAdminGuideInputsValid[1] = false
+					fmt.Println(getAdminGuideDescription)
+					fmt.Println("Len:")
+					fmt.Println(len(getAdminGuideDescription))
 				}
 
 				// Url validation

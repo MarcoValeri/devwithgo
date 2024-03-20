@@ -3,14 +3,21 @@
 {{define "title"}}{{.PageTitle}}{{end}}
 
 {{ define "content"}}
-<div>
-    <h2>Guide</h2>
+<div class="guide">
     {{ if .Guide }}
-        <p>Guide Title: {{ .Guide.Title }}</p>
+        <div class="guide__content">
+            <div class="guide__content-container-title">
+                <h1 class="h1">{{ .Guide.Title }}</h2>
+            </div>
+            <div class="guide__content-container-content">
+                {{ .Guide.Content }}
+            </div>
+        </div>
+        <!-- <p>Guide Title: {{ .Guide.Title }}</p>
         <p>Guide Description: {{ .Guide.Description }}</p>
         <p>Guide URL: {{ .Guide.Url }}</p>
         <p>Guide Published: {{ .Guide.Published }}</p>
-        <p>Guide Updated: {{ .Guide.Updated }}</p>
+        <p>Guide Updated: {{ .Guide.Updated }}</p> -->
     {{ else }}
         <h4>Guide no found</h4>
     {{ end }}

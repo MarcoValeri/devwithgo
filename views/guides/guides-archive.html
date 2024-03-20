@@ -3,23 +3,21 @@
 {{define "title"}}{{.PageTitle}}{{end}}
 
 {{ define "content"}}
-<div>
-    <h2>Guides archive</h2>
-    {{ if .Guides }}
-            {{ range .Guides }}
-                <p>Guide ID: {{ .Id }}</p>
-                <p>Guide Title: {{ .Title }}</p>
-                <p>Guide Description: {{ .Description }}</p>
-                <p>Guide URL: {{ .Url }}</p>
-                <p>Guide Published: {{ .Published }}</p>
-                <p>Guide Updated: {{ .Updated }}</p>
-                <a href="/guide/{{ .Url }}">Link</a>
-                <br />
-                <br />
-                <hr>
-            {{ end }}
+<div class="guide-archive">
+    <div class="guide-archive__container-title">
+        <h2 class="h2">Guides</h2>
+        <h4 class="h4">Larn Go programming language step-by-step</h4>
+    </div>
+    <div class="guide-archive__container-articles">
+        {{ if .Guides }}
+            <ol>
+                {{ range .Guides }}
+                    <li class="guide-archive__menu-item p-xl"><a class="link" href="/guide/{{ .Url }}">{{ .Title }}</a></li>
+                {{ end }}
+            </ol>
         {{ else }}
-            <h4>No guide found</h4>
+            <h4 class="h4">No guide found</h4>
         {{ end }}
+    </div>
 </div>
 {{end}}
