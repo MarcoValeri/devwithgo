@@ -11,10 +11,11 @@ import (
 )
 
 type GuideData struct {
-	PageTitle   string
-	CurrentYear int
-	Guides      []models.Guide
-	Guide       models.Guide
+	PageTitle       string
+	CurrentYear     int
+	Guides          []models.Guide
+	Guide           models.Guide
+	GuideContentRaw template.HTML
 }
 
 func GuidesArchive() {
@@ -51,11 +52,15 @@ func Guide() {
 			fmt.Println("Error finding guide by url:", err)
 		}
 
+		// Create raw content for html template
+		guideContentRaw := template.HTML(getGuide.Content)
+
 		// Set data page
 		data := GuideData{
-			PageTitle:   "Go Guides",
-			CurrentYear: time.Now().Year(),
-			Guide:       getGuide,
+			PageTitle:       "Go Guides",
+			CurrentYear:     time.Now().Year(),
+			Guide:           getGuide,
+			GuideContentRaw: guideContentRaw,
 		}
 
 		tmpl.Execute(w, data)

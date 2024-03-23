@@ -97,6 +97,7 @@ func GuideFindIt(getGuideId int) ([]Guide, error) {
 		if err != nil {
 			return nil, err
 		}
+
 		guideDatails := GuideNew(
 			guideId,
 			guideTitle,
@@ -137,6 +138,7 @@ func GuideFindByUrl(getGuideUrl string) (Guide, error) {
 		if err != nil {
 			return getGuideData, err
 		}
+
 		getGuideData = GuideNew(
 			guideId,
 			guideTitle,
