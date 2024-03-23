@@ -1,1 +1,68 @@
-.guide {}
+.guide {
+    // border: 1px solid #d00;
+
+    &__content {
+        width: 80%;
+        padding: 5rem;
+        margin: auto;
+
+        @include respond("md") {
+            width: auto;
+            padding: 5rem 1.5rem;
+        }
+    }
+
+    &__content-container-title {
+        margin-bottom: 2rem;
+    }
+
+    /*
+    * This container has the rules
+    * for the html content showed in
+    * the template
+    */
+    &__content-container-content {
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h3 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        h4 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 2rem;
+            line-height: normal;
+        }
+
+        a {
+            color: $blueGO;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
+        ul, ol {
+            margin-top: 1rem;
+            margin-left: 2rem;
+        }
+
+        li {
+            font-size: 2rem;
+            margin-bottom: .5rem;
+        }
+    }
+}

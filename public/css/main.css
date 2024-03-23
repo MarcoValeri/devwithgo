@@ -126,6 +126,48 @@ html {
     font-size: 2rem;
     color: #d00; }
 
+.guide {
+  /*
+    * This container has the rules
+    * for the html content showed in
+    * the template
+    */ }
+  .guide__content {
+    width: 80%;
+    padding: 5rem;
+    margin: auto; }
+    @media only screen and (max-width: 767px) {
+      .guide__content {
+        width: auto;
+        padding: 5rem 1.5rem; } }
+  .guide__content-container-title {
+    margin-bottom: 2rem; }
+  .guide__content-container-content h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem; }
+  .guide__content-container-content h2 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem; }
+  .guide__content-container-content h3 {
+    font-size: 3rem;
+    margin-bottom: 1rem; }
+  .guide__content-container-content h4 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem; }
+  .guide__content-container-content p {
+    font-size: 2rem;
+    line-height: normal; }
+  .guide__content-container-content a {
+    color: #00add8; }
+    .guide__content-container-content a:hover {
+      text-decoration: none; }
+  .guide__content-container-content ul, .guide__content-container-content ol {
+    margin-top: 1rem;
+    margin-left: 2rem; }
+  .guide__content-container-content li {
+    font-size: 2rem;
+    margin-bottom: .5rem; }
+
 .guide-archive {
   padding: 5rem; }
   @media only screen and (max-width: 767px) {
