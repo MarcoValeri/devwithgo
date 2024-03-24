@@ -241,11 +241,11 @@ func AdminGuideEdit() {
 				}
 
 				// Description validation
-				if len(getAdminGuideDescriptionEdit) > 0 && len(getAdminGuideDescriptionEdit) < 160 {
+				if len(getAdminGuideDescriptionEdit) > 0 && len(getAdminGuideDescriptionEdit) < 200 {
 					data.DescriptionError = ""
 					areAdmingGuideEditInputsValid[1] = true
 				} else {
-					data.DescriptionError = "Description should be between 1 t0 160 charactes"
+					data.DescriptionError = "Description should be between 1 to 200 charactes"
 					areAdmingGuideEditInputsValid[1] = false
 				}
 

@@ -63,6 +63,11 @@ func Guide() {
 			GuideContentRaw: guideContentRaw,
 		}
 
+		// Redirect to 404 page if the content has been not published yet
+		if !util.DateContentValidation(getGuide.Published) {
+			http.Redirect(w, r, "/", http.StatusSeeOther)
+		}
+
 		tmpl.Execute(w, data)
 	})
 }

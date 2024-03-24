@@ -48,7 +48,7 @@ func GuideEdit(getGuide Guide) error {
 	db := database.DatabaseConnection()
 	defer db.Close()
 
-	query, err := db.Query("UPDATE guides SET title = ?, description = ?, url = ?, published = ?, updated = ?, content = ?", getGuide.Title, getGuide.Description, getGuide.Url, getGuide.Published, getGuide.Updated, getGuide.Content)
+	query, err := db.Query("UPDATE guides SET title = ?, description = ?, url = ?, published = ?, updated = ?, content = ? WHERE id=?", getGuide.Title, getGuide.Description, getGuide.Url, getGuide.Published, getGuide.Updated, getGuide.Content, getGuide.Id)
 	if err != nil {
 		fmt.Println("Error on editing guide")
 		return err
