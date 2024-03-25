@@ -23,7 +23,7 @@ func GuidesArchive() {
 	http.HandleFunc("/guides/guides", func(w http.ResponseWriter, r *http.Request) {
 
 		// Get all the guides
-		getAllGuides, err := models.GuideShowGuides()
+		getAllGuides, err := models.GuideGetPublishedGuides()
 		if err != nil {
 			fmt.Println("Error getting all guides:", err)
 		}

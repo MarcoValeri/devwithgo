@@ -184,3 +184,34 @@ func GuideShowGuides() ([]Guide, error) {
 
 	return allGuides, nil
 }
+
+func GuideGetPublishedGuides() ([]Guide, error) {
+	db := database.DatabaseConnection()
+	defer db.Close()
+
+	rows, err := db.Query("SELECT * FROM guides WHERE published < NOW() ORDER BY published ASC")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var allGuides []Guide
+	for rows.Next() {
+		var guideId int
+		var guideTitle string
+		var guideDescription string
+		var guideUrl string
+		var guidePublished string
+		var guideUpdated string
+		var guideContent string
+		err = rows.Scan(&guideId, &guideTitle, &guideDescription, &guideUrl, &guidePublished, &guideUpdated, &guideContent)
+		if err != nil {
+			return nil, err
+		}
+
+		guideDetails := GuideNew(guideId, guideTitle, guideDescription, guideUrl, guidePublished, guideUpdated, guideContent)
+		allGuides = append(allGuides, guideDetails)
+	}
+
+	return allGuides, nil
+}
