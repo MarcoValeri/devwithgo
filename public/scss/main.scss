@@ -12,6 +12,9 @@
 @import "./base/base";
 @import "./base/typography";
 
+// Import component files
+@import "./components/codeblock";
+
 // Import layout files
 @import "./layout/header";
 @import "./layout/footer";

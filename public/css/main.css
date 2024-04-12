@@ -89,6 +89,23 @@ html {
   color: #000;
   text-decoration: none; }
 
+.codeblock {
+  margin: 2rem auto; }
+  .codeblock__code-file {
+    font-size: 2rem; }
+  .codeblock__wrapper {
+    font-size: 2rem;
+    color: #fff;
+    background-color: #000;
+    overflow: auto; }
+  .codeblock__wrapper::-webkit-scrollbar {
+    display: none; }
+  .codeblock__wrapper {
+    -ms-overflow-style: none;
+    scrollbar-width: none; }
+  .codeblock__container {
+    padding: 0 1rem; }
+
 .header {
   padding: 2rem 2rem 5rem 2rem;
   background-color: #00add8; }
