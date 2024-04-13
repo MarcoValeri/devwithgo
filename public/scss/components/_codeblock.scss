@@ -1,6 +1,16 @@
 .codeblock {
     margin: 2rem auto;
 
+    &__container-code-file {
+        background-color: $blueGO;
+        padding: 1rem;
+        border-radius: 10px 10px 0 0;
+    }
+
+    &__code-file {
+        font-weight: 900;
+    }
+
     &__code-file {
         font-size: 2rem;
     }
@@ -9,6 +19,10 @@
         font-size: 2rem;
         background-color: $black;
         overflow: auto;
+        border-style: solid;
+        border-width: 0 1px 1px 1px;
+        border-color: $blueGO;
+
     }
 
     &__wrapper::-webkit-scrollbar {
@@ -27,7 +41,7 @@
     }
 
     &__lines {
-        color: $black;
+        color: #b8bdc6;
         background-color: $white;
         padding: 1rem .5rem 1rem 0;
     }
