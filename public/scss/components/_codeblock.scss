@@ -7,7 +7,6 @@
 
     &__wrapper {
         font-size: 2rem;
-        color: $white;
         background-color: $black;
         overflow: auto;
     }
@@ -22,6 +21,20 @@
     }
 
     &__container {
-        padding: 0 1rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    &__lines {
+        color: $black;
+        background-color: $white;
+        padding: 1rem .5rem 1rem 0;
+    }
+
+    &__pre {
+        color: $white;
+        background-color: $black;
+        padding: 1rem;
     }
 }
