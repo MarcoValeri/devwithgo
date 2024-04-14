@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"os"
 
@@ -17,7 +18,7 @@ var dbLocal *sql.DB
 
 func DatabaseConnection() *sql.DB {
 
-	flag := "local"
+	flag := "platform"
 
 	if flag == "local" {
 		return databaseConnectionLocal()
@@ -33,22 +34,22 @@ func DatabaseConnection() *sql.DB {
 func databaseConnectionPlatformSh() *sql.DB {
 	config, err := psh.NewRuntimeConfig()
 	if err != nil {
-		log.Fatal("Some error occured. Err: $s", err)
+		fmt.Println("Some error occured. Err: $s", err)
 	}
 
 	credentials, err := config.Credentials("database")
 	if err != nil {
-		log.Fatal("Some error occured. Err: $s", err)
+		fmt.Println("Some error occured. Err: $s", err)
 	}
 
 	formatted, err := sqldsn.FormattedCredentials(credentials)
 	if err != nil {
-		log.Fatal("Some error occured. Err: $s", err)
+		fmt.Println("Some error occured. Err: $s", err)
 	}
 
 	dbPlatformSh, err := sql.Open("mysql", formatted)
 	if err != nil {
-		log.Fatal("Some error occured. Err: $s", err)
+		fmt.Println("Some error occured. Err: $s", err)
 	}
 
 	return dbPlatformSh
@@ -58,7 +59,7 @@ func databaseConnectionLocal() *sql.DB {
 
 	err := godotenv.Load(".env")
 	if err != nil {
-		log.Fatal("Some error occured. Err: $s", err)
+		fmt.Println("Some error occured. Err: $s", err)
 	}
 
 	dbCredentials := mysql.Config{
