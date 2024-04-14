@@ -51,4 +51,38 @@
         background-color: $black;
         padding: 1rem;
     }
+
+    // Colors
+    &__b-package {
+        // color: #4c7eff;
+        color: #0087ff;
+    }
+
+    &__g-package-name {
+        color: #7fbfd3;
+    }
+
+    &__p-import {
+        color: #c970c9;
+    }
+
+    &__o-string {
+        color: #c79943;
+    }
+
+    &__y-func-name {
+        color: #f5f571;
+    }
+
+    &__y-bracket {
+        color: #e1d200;
+    }
+
+    &__b-package-fmt {
+        color: #74d8ff;
+    }
+
+    &__p-bracket {
+        color: #e903e9;
+    }
 }

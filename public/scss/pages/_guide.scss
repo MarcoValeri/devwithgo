@@ -2,13 +2,25 @@
     // border: 1px solid #d00;
 
     &__content {
-        width: 80%;
-        padding: 5rem;
-        margin: auto;
+        width: 60%;
+        padding: 2rem 5rem;
+        margin: 5rem auto;
+        box-shadow: 0 0 50px 0 $blueGO;
+        border: 1px solid $blueGO;
+        border-radius: 15px;
+
+        @include respond("xxl") {
+            width: 70%;
+        }
+
+        @include respond("xl") {
+            width: 80%;
+        }
 
         @include respond("md") {
             width: auto;
-            padding: 5rem 1.5rem;
+            padding: 4rem 1.5rem;
+            margin: 5rem .5rem;
         }
     }
 
