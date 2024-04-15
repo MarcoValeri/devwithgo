@@ -54,12 +54,19 @@
 
     // Colors
     &__b-package {
-        // color: #4c7eff;
         color: #0087ff;
     }
 
+    &__g-comment {
+        color: #159f2e;
+    }
+
     &__g-package-name {
-        color: #7fbfd3;
+        color: #3ddf86;
+    }
+
+    &__g-variable-data {
+        color: #d4ffd4;
     }
 
     &__p-import {

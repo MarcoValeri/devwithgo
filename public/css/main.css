@@ -125,8 +125,12 @@ html {
     padding: 1rem; }
   .codeblock__b-package {
     color: #0087ff; }
+  .codeblock__g-comment {
+    color: #159f2e; }
   .codeblock__g-package-name {
-    color: #7fbfd3; }
+    color: #3ddf86; }
+  .codeblock__g-variable-data {
+    color: #d4ffd4; }
   .codeblock__p-import {
     color: #c970c9; }
   .codeblock__o-string {
