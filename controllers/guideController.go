@@ -18,7 +18,7 @@ type GuideData struct {
 	GuideContentRaw template.HTML
 }
 
-func GuidesArchive() {
+func GuidesArchiveController() {
 	tmpl := template.Must(template.ParseFiles("./views/templates/base.html", "./views/guides/guides-archive.html"))
 	http.HandleFunc("/guides/guides", func(w http.ResponseWriter, r *http.Request) {
 
@@ -39,7 +39,7 @@ func GuidesArchive() {
 	})
 }
 
-func Guide() {
+func GuideController() {
 	tmpl := template.Must(template.ParseFiles("./views/templates/base.html", "./views/guides/guide.html"))
 	http.HandleFunc("/guide/", func(w http.ResponseWriter, r *http.Request) {
 
