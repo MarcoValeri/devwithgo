@@ -1,29 +1,25 @@
 package controllers
 
 import (
+	"devwithgo/models"
 	"encoding/xml"
 	"fmt"
 	"net/http"
 )
 
-type SitemapURL struct {
-	Loc     string `xml:"loc"`
-	LastMod string `xml:"lastmod"`
-}
-
 type Sitemap struct {
-	XMLName xml.Name     `xml:"urlset"`
-	Xmlns   string       `xml:"xmlns,attr"`
-	URLs    []SitemapURL `xml:"url"`
+	XMLName xml.Name            `xml:"urlset"`
+	Xmlns   string              `xml:"xmlns,attr"`
+	URLs    []models.SitemapURL `xml:"url"`
 }
 
 func SitemapController() {
 	http.HandleFunc("/sitemap.xml", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/xml")
 
-		urls := []SitemapURL{
-			{"https://www.devwithgo.dev/", "2024-04-24"},
-			{"https://www.devwithgo.dev/about", "2024-04-24"},
+		urls, err := models.SitemapAllURLs()
+		if err != nil {
+			fmt.Println("Error:", err)
 		}
 
 		sitemap := Sitemap{
