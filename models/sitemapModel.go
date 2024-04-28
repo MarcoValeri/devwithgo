@@ -12,8 +12,8 @@ func SitemapAllURLs() ([]SitemapURL, error) {
 	var setURLsList []SitemapURL
 
 	// Set URLs that are not stored in the db
-	urlZero := SitemapURL{"https://www.devwithgo.dev/", "2024-03-26"}
-	urlOne := SitemapURL{"https://www.devwithgo.dev/about", "2024-03-26"}
+	urlZero := SitemapURL{"https://www.devwithgo.dev/", "2024-04-28"}
+	urlOne := SitemapURL{"https://www.devwithgo.dev/guides/guides", "2024-04-28"}
 	setURLsList = append(setURLsList, urlZero)
 	setURLsList = append(setURLsList, urlOne)
 
@@ -35,7 +35,7 @@ func SitemapAllURLs() ([]SitemapURL, error) {
 		if err != nil {
 			return nil, err
 		}
-		urlGuide.Loc = guideUrl
+		urlGuide.Loc = "https://www.devwithgo.dev/guide/" + guideUrl
 		urlGuide.LastMod = guideUpdated
 		setURLsList = append(setURLsList, urlGuide)
 	}
