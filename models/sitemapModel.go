@@ -36,7 +36,7 @@ func SitemapAllURLs() ([]SitemapURL, error) {
 			return nil, err
 		}
 		urlGuide.Loc = "https://www.devwithgo.dev/guide/" + guideUrl
-		urlGuide.LastMod = guideUpdated
+		urlGuide.LastMod = guideUpdated[:10]
 		setURLsList = append(setURLsList, urlGuide)
 	}
 
