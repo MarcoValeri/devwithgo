@@ -3,14 +3,16 @@ package models
 import "time"
 
 type PageData struct {
-	PageTitle   string
-	CurrentYear int
+	PageTitle       string
+	PageDescription string
+	CurrentYear     int
 }
 
-func NewPageData(getPageTitle string) PageData {
+func NewPageData(getPageTitle, getPageDescription string) PageData {
 	setPageData := PageData{
-		PageTitle:   getPageTitle,
-		CurrentYear: time.Now().Year(),
+		PageTitle:       getPageTitle,
+		PageDescription: getPageDescription,
+		CurrentYear:     time.Now().Year(),
 	}
 	return setPageData
 }

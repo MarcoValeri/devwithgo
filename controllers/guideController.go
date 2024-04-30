@@ -12,6 +12,7 @@ import (
 
 type GuideData struct {
 	PageTitle       string
+	PageDescription string
 	CurrentYear     int
 	Guides          []models.Guide
 	Guide           models.Guide
@@ -30,9 +31,10 @@ func GuidesArchiveController() {
 
 		// Set data page
 		data := GuideData{
-			PageTitle:   "Go Guides",
-			CurrentYear: time.Now().Year(),
-			Guides:      getAllGuides,
+			PageTitle:       "Learn Go programming language",
+			PageDescription: "Learn Go programming language: guides from basics to advanced concepts, mastering powerful Golang features for becoming a skilled Gopher and Go developer",
+			CurrentYear:     time.Now().Year(),
+			Guides:          getAllGuides,
 		}
 
 		tmpl.Execute(w, data)
@@ -57,7 +59,8 @@ func GuideController() {
 
 		// Set data page
 		data := GuideData{
-			PageTitle:       "Go Guides",
+			PageTitle:       getGuide.Title,
+			PageDescription: getGuide.Description,
 			CurrentYear:     time.Now().Year(),
 			Guide:           getGuide,
 			GuideContentRaw: guideContentRaw,
