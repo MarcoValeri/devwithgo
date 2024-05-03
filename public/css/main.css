@@ -83,7 +83,7 @@ html {
   font-size: 1.4rem; }
 
 .link {
-  color: #00add8; }
+  color: #006078; }
 
 .link-no {
   color: #000;
@@ -143,6 +143,21 @@ html {
     color: #74d8ff; }
   .codeblock__p-bracket {
     color: #e903e9; }
+
+.prev-next-guide {
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem 0;
+  margin-top: 5rem;
+  border-top: 2px solid #00add8;
+  border-bottom: 2px solid #00add8; }
+  @media only screen and (max-width: 991px) {
+    .prev-next-guide {
+      flex-direction: column;
+      align-items: center; } }
+  @media only screen and (max-width: 991px) {
+    .prev-next-guide__container-prev {
+      margin-bottom: 2rem; } }
 
 .terminal {
   margin: 2rem auto; }
@@ -268,7 +283,7 @@ html {
       .guide-archive__container-articles {
         padding: 5rem 3rem; } }
   .guide-archive__menu-item {
-    color: #00add8;
+    color: #006078;
     margin-bottom: 1rem; }
 
 .home {

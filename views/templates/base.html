@@ -6,6 +6,16 @@
     <link rel="stylesheet" href="/public/css/main.css">
     <title>{{template "title" .}}</title>
     {{template "description" .}}
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J6HG4D0VJ3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-J6HG4D0VJ3');
+    </script>
 </head>
 <body>
     <header class="header">
