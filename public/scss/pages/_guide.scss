@@ -1,6 +1,4 @@
 .guide {
-    // border: 1px solid #d00;
-
     &__content {
         width: 60%;
         padding: 2rem 5rem;
@@ -61,7 +59,7 @@
         }
 
         a {
-            color: $blueGO;
+            color: $blueLink;
             &:hover {
                 text-decoration: none;
             }
