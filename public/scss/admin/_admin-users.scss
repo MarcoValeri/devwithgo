@@ -1,1 +1,13 @@
-.admin-users {}
+.admin-users {
+    padding: 3rem 5rem;
+
+    &__container-title {
+        margin-bottom: 2rem;
+    }
+
+    &__container-users {}
+
+    &__container-single-user {
+        margin-bottom: 2rem;
+    }
+}

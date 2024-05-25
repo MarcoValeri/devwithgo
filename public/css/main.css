@@ -10,14 +10,23 @@
 *
 * This project follow the logic of responsive-design
 */
+.admin-dashboard {
+  padding: 3rem 5rem; }
+
+.admin-users {
+  padding: 3rem 5rem; }
+  .admin-users__container-title {
+    margin-bottom: 2rem; }
+  .admin-users__container-single-user {
+    margin-bottom: 2rem; }
+
 .admin-user-add {
   border: 1px solid #d00; }
 
 .base-admin {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  grid-template-areas: "base-admin__sidebar base-admin__content";
-  border: 1px solid #d00; }
+  grid-template-areas: "base-admin__sidebar base-admin__content"; }
   @media only screen and (max-width: 991px) {
     .base-admin {
       grid-template-columns: 1fr 2fr; } }
@@ -28,10 +37,16 @@
       border: 1px solid #00d; } }
   .base-admin__sidebar {
     grid-area: base-admin__sidebar;
-    border: 1px solid #000; }
+    padding: 2rem 0;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000; }
+  .base-admin__sidebar-element {
+    padding: 1rem;
+    border-bottom: 1px solid #000; }
+    .base-admin__sidebar-element:last-child {
+      border-bottom: none; }
   .base-admin__content {
-    grid-area: base-admin__content;
-    border: 1px solid #00d; }
+    grid-area: base-admin__content; }
 
 * {
   padding: 0;

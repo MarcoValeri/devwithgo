@@ -3,7 +3,6 @@
     grid-template-columns: 1fr 4fr;
     grid-template-areas:
     "base-admin__sidebar base-admin__content";
-    border: 1px solid #d00;
 
     @include respond("lg") {
         grid-template-columns: 1fr 2fr;
@@ -19,11 +18,23 @@
 
     &__sidebar {
         grid-area: base-admin__sidebar;
-        border: 1px solid $black;
+        padding: 2rem 0;
+        border-right: 1px solid $black;
+        border-bottom: 1px solid $black;
+    }
+
+    &__wrapper {}
+
+    &__sidebar-element {
+        padding: 1rem;
+        border-bottom: 1px solid $black;
+
+        &:last-child {
+            border-bottom: none;
+        }
     }
 
     &__content {
         grid-area: base-admin__content;
-        border: 1px solid #00d;
     }
 }
