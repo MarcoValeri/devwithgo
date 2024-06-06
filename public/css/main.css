@@ -150,6 +150,8 @@ html {
     color: #c970c9; }
   .codeblock__o-string {
     color: #c79943; }
+  .codeblock__o-string-new-line {
+    color: #fbc868; }
   .codeblock__y-func-name {
     color: #f5f571; }
   .codeblock__y-bracket {
