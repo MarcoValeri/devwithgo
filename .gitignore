@@ -6,3 +6,4 @@ node_modules
 
 # Images
 public/images/*
+!public/images/.gitignore
