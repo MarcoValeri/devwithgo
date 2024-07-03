@@ -1,6 +1,7 @@
 package admincontrollers
 
 import (
+	"devwithgo/models"
 	"devwithgo/util"
 	"fmt"
 	"html/template"
@@ -36,7 +37,7 @@ func AdminUploadImage() {
 			}
 
 			// Flag validation
-			var areAdminImageInputsValid [6]bool
+			var areAdminImageInputsValid [7]bool
 			isFormSubmittionValid := false
 
 			// Get values from the form
@@ -113,6 +114,15 @@ func AdminUploadImage() {
 					areAdminImageInputsValid[5] = false
 				}
 
+				// Image file validation
+				if util.FormIsValidImage(getImageFile, header.Filename) {
+					data.ImageFileError = ""
+					areAdminImageInputsValid[6] = true
+				} else {
+					data.ImageFileError = "Image file is not valid"
+					areAdminImageInputsValid[6] = false
+				}
+
 				for i := 0; i < len(areAdminImageInputsValid); i++ {
 					isFormSubmittionValid = true
 					if !areAdminImageInputsValid[i] {
@@ -123,36 +133,75 @@ func AdminUploadImage() {
 
 				// Store image and save its data to the db
 				if isFormSubmittionValid {
-					// TODO: method for storing data to the db
-					// TODO: sanitize image input
+
+					// Flag validation for uploading image
+					var isImageUploadedCorrectly [4]bool
+					isImageUploaded := false
+
 					if errImageFile != nil {
 						fmt.Println("Error retrieving the image file:", errImageFile)
-						return
+						data.ImageFileError = "Image file is not valid"
+						isImageUploadedCorrectly[0] = false
+					} else {
+						data.ImageFileError = ""
+						isImageUploadedCorrectly[0] = true
 					}
-					// defer imageFile.Close()
 
 					imagePath := filepath.Join("public", "images", header.Filename)
 					absImagePath, errImagePath := filepath.Abs(imagePath)
 					if errImagePath != nil {
 						fmt.Println("Error determing image path:", errImagePath)
-						return
+						data.ImageFileError = "Image file is not valid"
+						isImageUploadedCorrectly[1] = false
+					} else {
+						data.ImageFileError = ""
+						isImageUploadedCorrectly[1] = true
 					}
 
 					dst, erDst := os.Create(absImagePath)
 					if erDst != nil {
 						fmt.Println("Error creating image file:", erDst)
+						data.ImageFileError = "Image file is not valid"
+						isImageUploadedCorrectly[2] = false
+					} else {
+						data.ImageFileError = ""
+						isImageUploadedCorrectly[2] = true
 					}
 
 					_, errCopy := io.Copy(dst, getImageFile)
 					if errCopy != nil {
 						fmt.Println("Error saving image file:", errCopy)
-						return
+						data.ImageFileError = "Image file is not valid"
+						isImageUploadedCorrectly[3] = false
+					} else {
+						data.ImageFileError = ""
+						isImageUploadedCorrectly[3] = true
 					}
 
 					defer dst.Close()
 					defer getImageFile.Close()
 
-					http.Redirect(w, r, "/admin/dashboard", http.StatusSeeOther)
+					for i := 0; i < len(isImageUploadedCorrectly); i++ {
+						isImageUploaded = true
+						if !isImageUploadedCorrectly[i] {
+							isImageUploaded = false
+							break
+						}
+					}
+
+					if isImageUploaded {
+						createNewImage := models.ImageNew(
+							1,
+							getImageTitle,
+							getImageDescription,
+							getImageUrl,
+							getImagePublished,
+							getImageUpdated,
+						)
+						models.ImageAddNewToDB(createNewImage)
+						http.Redirect(w, r, "/admin/dashboard", http.StatusSeeOther)
+					}
+
 				}
 			}
 
