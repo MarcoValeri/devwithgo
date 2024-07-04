@@ -9,6 +9,8 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
+	"strings"
 )
 
 type imageData struct {
@@ -20,9 +22,35 @@ type imageData struct {
 	ImagePublishedError   string
 	ImageUpdatedError     string
 	ImageFileError        string
+	Images                []models.Image
 }
 
-func AdminUploadImage() {
+func AdminImages() {
+	tmpl := template.Must(template.ParseFiles("./views/admin/templates/baseAdmin.html", "./views/admin/admin-images.html"))
+	http.HandleFunc("/admin/images", func(w http.ResponseWriter, r *http.Request) {
+		session, errSession := store.Get(r, "session-authentication")
+		if errSession != nil {
+			fmt.Println("Error on session-authentication:", errSession)
+		}
+		if session.Values["user-admin-authentication"] == true {
+			imagesData, err := models.ImageShowImages()
+			if err != nil {
+				fmt.Println("Error getting imagesData:", err)
+			}
+
+			data := imageData{
+				PageTitle: "Admin Images",
+				Images:    imagesData,
+			}
+
+			tmpl.Execute(w, data)
+		} else {
+			http.Redirect(w, r, "/admin/login", http.StatusSeeOther)
+		}
+	})
+}
+
+func AdminImageAdd() {
 	tmpl := template.Must(template.ParseFiles("./views/admin/templates/baseAdmin.html", "./views/admin/admin-image-add.html"))
 	http.HandleFunc("/admin/image-add", func(w http.ResponseWriter, r *http.Request) {
 
@@ -194,6 +222,7 @@ func AdminUploadImage() {
 							1,
 							getImageTitle,
 							getImageDescription,
+							getImageCredit,
 							getImageUrl,
 							getImagePublished,
 							getImageUpdated,
@@ -210,5 +239,196 @@ func AdminUploadImage() {
 			http.Redirect(w, r, "/admin/login", http.StatusSeeOther)
 		}
 
+	})
+}
+
+func AdminImageEdit() {
+	tmpl := template.Must(template.ParseFiles("./views/admin/templates/baseAdmin.html", "./views/admin/admin-image-edit.html"))
+	http.HandleFunc("/admin/image-edit/", func(w http.ResponseWriter, r *http.Request) {
+		session, errSession := store.Get(r, "session-authentication")
+		if errSession != nil {
+			fmt.Println("Error on session-authentication:", errSession)
+		}
+
+		if session.Values["user-admin-authentication"] == true {
+			idPath := strings.TrimPrefix(r.URL.Path, "/admin/image-edit/")
+			idPath = util.FormSanitizeStringInput(idPath)
+
+			imageId, err := strconv.Atoi(idPath)
+			if err != nil {
+				fmt.Println("Error converting string to integer:", err)
+				return
+			}
+
+			getImageEdit, err := models.ImageFindIt(imageId)
+			if err != nil {
+				fmt.Println("Error to find image by id:", err)
+			}
+
+			data := imageData{
+				PageTitle: "Admin Image Edit",
+				Images:    getImageEdit,
+			}
+
+			/**
+			* Check if the form for editing the image has been submitted
+			* and
+			* validate the inputs
+			 */
+			var areAdminImageEditInputsValid [6]bool
+			isFormSubmittionValid := false
+
+			// Get the values from the form
+			getAdminImageTitleEdit := r.FormValue("image-title-edit")
+			getAdminImageDescriptionEdit := r.FormValue("image-description-edit")
+			getAdminImageCreditEdit := r.FormValue("image-credit-edit")
+			getAdminImageUrlEdit := r.FormValue("image-url-edit")
+			getAdminImagePublishedEdit := r.FormValue("image-published-edit")
+			getAdminImageUpdatedEdit := r.FormValue("image-updated-edit")
+			getAdminImageSubmitEdit := r.FormValue("image-edit")
+
+			// Sanitize form inputs
+			getAdminImageTitleEdit = util.FormSanitizeStringInput(getAdminImageTitleEdit)
+			getAdminImageDescriptionEdit = util.FormSanitizeStringInput(getAdminImageDescriptionEdit)
+			getAdminImageCreditEdit = util.FormSanitizeStringInput(getAdminImageCreditEdit)
+			getAdminImageUrlEdit = util.FormSanitizeStringInput(getAdminImageUrlEdit)
+			getAdminImagePublishedEdit = util.FormSanitizeStringInput(getAdminImagePublishedEdit)
+			getAdminImageUpdatedEdit = util.FormSanitizeStringInput(getAdminImageUpdatedEdit)
+			getAdminImageSubmitEdit = util.FormSanitizeStringInput(getAdminImageSubmitEdit)
+
+			// Check if the form has been submitted
+			if getAdminImageSubmitEdit == "Edit this image" {
+				// Title validation
+				if len(getAdminImageTitleEdit) > 0 {
+					data.ImageTitleError = ""
+					areAdminImageEditInputsValid[0] = true
+				} else {
+					data.ImageTitleError = "Title should be longer than 0 characters"
+					areAdminImageEditInputsValid[0] = false
+				}
+
+				// Description validation
+				if len(getAdminImageDescriptionEdit) > 0 {
+					data.ImageDescriptionError = ""
+					areAdminImageEditInputsValid[1] = true
+				} else {
+					data.ImageDescriptionError = "Description should be longer than 0 characters"
+					areAdminImageEditInputsValid[1] = false
+				}
+
+				// Credit validation
+				if len(getAdminImageCreditEdit) > 0 {
+					data.ImageCreditError = ""
+					areAdminImageEditInputsValid[2] = true
+				} else {
+					data.ImageCreditError = "Credit should be longer than 0 characters"
+					areAdminImageEditInputsValid[2] = false
+				}
+
+				// Url validation
+				if len(getAdminImageUrlEdit) > 0 {
+					data.ImageUrlError = ""
+					areAdminImageEditInputsValid[3] = true
+				} else {
+					data.ImageUrlError = "URL should be longer than 0 characters"
+					areAdminImageEditInputsValid[3] = false
+				}
+
+				// Published validation
+				if len(getAdminImagePublishedEdit) > 0 {
+					data.ImagePublishedError = ""
+					areAdminImageEditInputsValid[4] = true
+				} else {
+					data.ImagePublishedError = "Add a date"
+					areAdminImageEditInputsValid[4] = false
+				}
+
+				// Uploaded validation
+				if len(getAdminImageUpdatedEdit) > 0 {
+					data.ImageUpdatedError = ""
+					areAdminImageEditInputsValid[5] = true
+				} else {
+					data.ImageUpdatedError = "Add a date"
+					areAdminImageEditInputsValid[5] = false
+				}
+
+				for i := 0; i < len(areAdminImageEditInputsValid); i++ {
+					isFormSubmittionValid = true
+					if !areAdminImageEditInputsValid[i] {
+						isFormSubmittionValid = false
+						break
+					}
+				}
+
+				// Edit image if all inputs are valid and redirect to all images list
+				if isFormSubmittionValid {
+					editImage := models.ImageNew(imageId, getAdminImageTitleEdit, getAdminImageDescriptionEdit, getAdminImageCreditEdit, getAdminImageUrlEdit, getAdminImagePublishedEdit, getAdminImageUpdatedEdit)
+					models.ImageEdit(editImage)
+					http.Redirect(w, r, "/admin/images", http.StatusSeeOther)
+				}
+			}
+
+			tmpl.Execute(w, data)
+		} else {
+			http.Redirect(w, r, "/admin/login", http.StatusSeeOther)
+		}
+	})
+}
+
+func AdminImageDelete() {
+	tmpl := template.Must(template.ParseFiles("./views/admin/templates/baseAdmin.html", "./views/admin/admin-image-delete.html"))
+	http.HandleFunc("/admin/image-delete/", func(w http.ResponseWriter, r *http.Request) {
+		session, errSession := store.Get(r, "session-authentication")
+		if errSession != nil {
+			fmt.Println("Error on session-authentication:", errSession)
+		}
+		if session.Values["user-admin-authentication"] == true {
+			idPath := strings.TrimPrefix(r.URL.Path, "/admin/image-delete/")
+			idPath = util.FormSanitizeStringInput(idPath)
+
+			imageId, err := strconv.Atoi(idPath)
+			if err != nil {
+				fmt.Println("Error converting string to integer:", err)
+				return
+			}
+
+			getImageDelete, err := models.ImageFindIt(imageId)
+			if err != nil {
+				fmt.Println("Error to find image:", err)
+			}
+
+			data := imageData{
+				PageTitle: "Admin Delete Image",
+				Images:    getImageDelete,
+			}
+
+			/**
+			* Check if the form for deleting image has
+			* been submitted
+			* and
+			* delete the selected image
+			 */
+			isFormSubmittionValid := false
+
+			// Get the value from the form
+			getAdminImageDeleteSubmit := r.FormValue("admin-image-delete")
+
+			// Sanitize form input
+			getAdminImageDeleteSubmit = util.FormSanitizeStringInput(getAdminImageDeleteSubmit)
+
+			// Check if the form has been submitted
+			if getAdminImageDeleteSubmit == "Delete this image" {
+				isFormSubmittionValid = true
+			}
+
+			if isFormSubmittionValid {
+				models.ImageDelete(imageId)
+				http.Redirect(w, r, "/admin/images", http.StatusSeeOther)
+			}
+
+			tmpl.Execute(w, data)
+		} else {
+			http.Redirect(w, r, "/admin/login", http.StatusSeeOther)
+		}
 	})
 }
