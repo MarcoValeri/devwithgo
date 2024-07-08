@@ -20,6 +20,7 @@ func AdminController() {
 	admincontrollers.AdminGuideEdit()
 
 	admincontrollers.AdminTutorials()
+	admincontrollers.AdminTutorialAdd()
 
 	admincontrollers.AdminImages()
 	admincontrollers.AdminImageAdd()

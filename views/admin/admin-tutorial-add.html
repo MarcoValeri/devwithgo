@@ -8,31 +8,32 @@
         <form method="POST">
             <div>
                 <input type="text" name="tutorial-title" placeholder="Title*" required />
-                <span>{{.TitleError}}</span>
             </div>
             <div>
                 <input type="text" name="tutorial-description" placeholder="Description*" required />
-                <span>{{.DescriptionError}}</span>
             </div>
             <div>
                 <input type="text" name="tutorial-url" placeholder="URL*" required />
-                <span>{{.UrlError}}</span>
             </div>
             <div>
                 <input type="datetime-local" name="tutorial-published" required />
-                <span>{{.PublishedError}}</span>
             </div>
             <div>
                 <input type="datetime-local" name="tutorial-updated" required />
-                <span>{{.UpdatedError}}</span>
             </div>
             <div>
-                <input type="datetime-local" name="tutorial-image" required />
-                <span>{{.UpdatedError}}</span>
+                <select name="tutorial-image">
+                    {{ if .Images }}
+                        {{ range .Images }}
+                            <option value="{{ .Url }}">{{ .Url }}</option>
+                        {{ end }}
+                    {{ else }}
+                        <option value="no-image-found">No image found</option>
+                    {{ end }}
+                </select>
             </div>
             <div>
                 <textarea name="tutorial-content"></textarea>
-                <span>{{.ContentError}}</span>
             </div>
             <div>
                 <input type="submit" name="tutorial-add" value="Add new guide" />

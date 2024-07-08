@@ -138,3 +138,36 @@ func ImageFindIt(getImageId int) ([]Image, error) {
 
 	return getImageData, nil
 }
+
+func ImageFindByUrlReturnItsId(getImageUrl string) (int, error) {
+	db := database.DatabaseConnection()
+	defer db.Close()
+
+	rows, err := db.Query("SELECT * FROM images WHERE url=?", getImageUrl)
+	if err != nil {
+		fmt.Println("Error on image query:", err)
+		return 0, err
+	}
+	defer rows.Close()
+
+	var getImageData Image
+	for rows.Next() {
+		var imageId int
+		var imageTitle string
+		var imageDescription string
+		var imageCredit string
+		var imageUrl string
+		var imagePublished string
+		var imageUpdated string
+		err = rows.Scan(&imageId, &imageTitle, &imageDescription, &imageCredit, &imageUrl, &imagePublished, &imageUpdated)
+		if err != nil {
+			fmt.Println("Error getting image data:", err)
+			return 0, err
+		}
+
+		imageDetails := ImageNew(imageId, imageTitle, imageDescription, imageCredit, imageUrl, imagePublished, imageUpdated)
+		getImageData = imageDetails
+	}
+
+	return getImageData.Id, nil
+}
