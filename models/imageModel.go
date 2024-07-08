@@ -33,8 +33,8 @@ func ImageAddNewToDB(getImage Image) error {
 	defer db.Close()
 
 	query, err := db.Query(
-		"INSERT INTO images (title, description, url, published, updated) VALUES (?, ?, ?, ?, ?)",
-		getImage.Title, getImage.Description, getImage.Url, getImage.Published, getImage.Updated,
+		"INSERT INTO images (title, description, credit, url, published, updated) VALUES (?, ?, ?, ?, ?, ?)",
+		getImage.Title, getImage.Description, getImage.Credit, getImage.Url, getImage.Published, getImage.Updated,
 	)
 	if err != nil {
 		fmt.Println("Error adding new image data to the db:", err)

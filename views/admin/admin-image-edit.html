@@ -19,27 +19,21 @@
                 <form method="POST">
                     <div>
                         <input type="text" name="image-title-edit" value="{{ .Title }}" placeholder="Title*" required />
-                        <span>{{.ImageTitleError}}</span>
                     </div>
                     <div>
                         <input type="text" name="image-description-edit" value="{{ .Description }}" placeholder="Description*" required />
-                        <span>{{.ImageDescriptionError}}</span>
                     </div>
                     <div>
-                        <input type="text" name="image-credit-edit" placeholder="Image Credits*" required />
-                        <span>{{.ImageCreditError}}</span>
+                        <input type="text" name="image-credit-edit" value="{{ .Credit }}" placeholder="Image Credits*" required />
                     </div>
                     <div>
                         <input type="text" name="image-url-edit" value="{{ .Url }}" placeholder="Url*" required />
-                        <span>{{.ImageUrlnError}}</span>
                     </div>
                     <div>
                         <input type="datetime-local" name="image-published-edit" value="{{ .Published }}" placeholder="Published*" required />
-                        <span>{{.ImagePublishedError}}</span>
                     </div>
                     <div>
                         <input type="datetime-local" name="image-updated-edit" value="{{ .Updated }}" placeholder="Updated*" required />
-                        <span>{{.ImageUpdatedError}}</span>
                     </div>
                     <div>
                         <input type="submit" name="image-edit" value="Edit this image" />

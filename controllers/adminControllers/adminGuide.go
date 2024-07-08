@@ -29,6 +29,7 @@ func AdminGuides() {
 		if errSession != nil {
 			fmt.Println("Error on session-authentication:", errSession)
 		}
+
 		if session.Values["user-admin-authentication"] == true {
 			guidesData, err := models.GuideShowGuides()
 			if err != nil {

@@ -18,6 +18,7 @@
                 <h2>Edit this image</h2>
                 <form method="POST">
                     <div>
+                        <input type="hidden" name="admin-image-url-delete" value="{{ .Url }}" />
                         <input type="submit" name="admin-image-delete" value="Delete this image" />
                     </div>
                 </form>

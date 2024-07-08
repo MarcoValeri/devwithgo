@@ -13,6 +13,7 @@
                 <p>Image Url: {{ .Url }}</p>
                 <p>Image Published: {{ .Published }}</p>
                 <p>Image Updated: {{ .Updated }}</p>
+                <img width="100" height="100" src="../../public/images/{{ .Url }}" alt="{{ .Title }}" />
                 <a href="/admin/image-edit/{{ .Id }}">Edit</a>
                 <a href="/admin/image-delete/{{ .Id }}">Delete</a>
             {{ end }}

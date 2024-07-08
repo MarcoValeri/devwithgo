@@ -228,7 +228,7 @@ func AdminImageAdd() {
 							getImageUpdated,
 						)
 						models.ImageAddNewToDB(createNewImage)
-						http.Redirect(w, r, "/admin/dashboard", http.StatusSeeOther)
+						http.Redirect(w, r, "/admin/images", http.StatusSeeOther)
 					}
 
 				}
@@ -411,14 +411,34 @@ func AdminImageDelete() {
 			isFormSubmittionValid := false
 
 			// Get the value from the form
+			getAdminImageDeleteUrl := r.FormValue("admin-image-url-delete")
 			getAdminImageDeleteSubmit := r.FormValue("admin-image-delete")
 
 			// Sanitize form input
+			getAdminImageDeleteUrl = util.FormSanitizeStringInput(getAdminImageDeleteUrl)
 			getAdminImageDeleteSubmit = util.FormSanitizeStringInput(getAdminImageDeleteSubmit)
 
 			// Check if the form has been submitted
-			if getAdminImageDeleteSubmit == "Delete this image" {
-				isFormSubmittionValid = true
+			if getAdminImageDeleteSubmit == "Delete this image" && len(getAdminImageDeleteUrl) > 0 {
+
+				// TODO: delete image from the images folder
+				imagePath := filepath.Join("public/images", getAdminImageDeleteUrl)
+
+				if _, err := os.Stat(imagePath); os.IsNotExist(err) {
+					fmt.Println("Image not found:", err)
+					isFormSubmittionValid = false
+				} else {
+					isFormSubmittionValid = true
+				}
+
+				err := os.Remove(imagePath)
+				if err != nil {
+					fmt.Println("Error deleteing image:", err)
+					isFormSubmittionValid = false
+				} else {
+					isFormSubmittionValid = true
+				}
+
 			}
 
 			if isFormSubmittionValid {
