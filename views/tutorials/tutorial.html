@@ -1,0 +1,21 @@
+{{template "base" .}}
+
+{{define "title"}}{{.PageTitle}}{{end}}
+{{define "description"}}<meta name="description" content="{{.PageDescription}}">{{end}}
+
+{{ define "content"}}
+<div class="tutorial">
+    {{ if .Tutorial }}
+        <div>
+            <div>
+                <h1 class="h1">{{ .Tutorial.Title }}</h2>
+            </div>
+            <div>
+                {{ .TutorialContentRaw }}
+            </div>
+        </div>
+    {{ else }}
+        <h4>Tutorial no found</h4>
+    {{ end }}
+</div>
+{{end}}

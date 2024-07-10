@@ -21,6 +21,8 @@ func AdminController() {
 
 	admincontrollers.AdminTutorials()
 	admincontrollers.AdminTutorialAdd()
+	admincontrollers.AdminTutorialDelete()
+	admincontrollers.AdminTutorialEdit()
 
 	admincontrollers.AdminImages()
 	admincontrollers.AdminImageAdd()

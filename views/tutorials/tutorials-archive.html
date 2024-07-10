@@ -1,0 +1,24 @@
+{{template "base" .}}
+
+{{define "title"}}{{.PageTitle}}{{end}}
+{{define "description"}}<meta name="description" content="{{.PageDescription}}">{{end}}
+
+{{ define "content"}}
+<div class="tutorial-archive">
+    <div>
+        <h2 class="h2">Tutorials</h2>
+        <h3 class="h4">Tutorials Go</h3>
+    </div>
+    <div>
+        {{ if .Tutorials }}
+            <ol>
+                {{ range .Tutorials }}
+                    <li class="p-xl"><a class="link" href="/tutorial/{{ .Url }}">{{ .Title }}</a></li>
+                {{ end }}
+            </ol>
+        {{ else }}
+            <h4 class="h4">No tutorial found</h4>
+        {{ end }}
+    </div>
+</div>
+{{end}}

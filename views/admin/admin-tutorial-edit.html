@@ -1,0 +1,59 @@
+{{template "baseAdmin" .}}
+
+{{define "title"}}{{ .PageTitle }}{{end}}
+
+<div class="admin-users">
+    {{ define "adminContent"}}
+        <h2>Admin Tutorial Edit</h2>
+        {{ if .TutorialsWithRelatedImage }}
+            {{ range .TutorialsWithRelatedImage }}
+                <p>Tutorial ID: {{ .Id }}</p>
+                <p>Tutorial Title: {{ .Title }}</p>
+                <p>Tutorial Description: {{ .Description }}</p>
+                <p>Tutorial URL: {{ .Url }}</p>
+                <p>Tutorial Published: {{ .Published }}</p>
+                <p>Tutorial Updated: {{ .Updated }}</p>
+                <p>Tutorial Image: {{ .ImageUrl }}</p>
+                <div>
+                    <h2>Edit this tutorial</h2>
+                    <form method="POST">
+                        <div>
+                            <input type="text" name="tutorial-edit-title" value="{{ .Title }}" placeholder="Title*" required />
+                        </div>
+                        <div>
+                            <input type="text" name="tutorial-edit-description" value="{{ .Description }}" placeholder="Description*" required />
+                        </div>
+                        <div>
+                            <input type="text" name="tutorial-edit-url" value="{{ .Url }}" placeholder="URL*" required />
+                        </div>
+                        <div>
+                            <input type="datetime-local" name="tutorial-edit-published" value="{{ .Published }}" required />
+                        </div>
+                        <div>
+                            <input type="datetime-local" name="tutorial-edit-updated" value="{{ .Updated }}" required />
+                        </div>
+                        <div>
+                            <input type="text" name="tutorial-edit-image" value="{{ .ImageUrl }}" required />
+                        </div>
+                        <div>
+                            <textarea name="tutorial-edit-content">{{ .Content }}</textarea>
+                        </div>
+                        <div>
+                            <input type="submit" name="tutorial-edit" value="Edit this tutorial" />
+                        </div>
+                    </form>
+                </div>
+            {{ end }}
+            <!-- <div>
+                <p>{{ .TitleError }}</p>
+                <p>{{ .DescriptionError }}</p>
+                <p>{{ .UrlError }}</p>
+                <p>{{ .PublishedError }}</p>
+                <p>{{ .UpdatedError }}</p>
+                <p>{{ .ContentError }}</p>
+            </div> -->
+        {{ else }}
+            <h4>No guide found</h4>
+        {{ end }}
+    {{end}}
+</div>
