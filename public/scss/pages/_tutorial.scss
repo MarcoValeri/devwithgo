@@ -1,1 +1,40 @@
-.tutorial {}
+.tutorial {
+    &__content {
+        width: 60%;
+        padding: 2rem 5rem;
+        margin: 5rem auto;
+        box-shadow: 0 0 50px 0 $blueGO;
+        border: 1px solid $blueGO;
+        border-radius: 15px;
+
+        @include respond("xxl") {
+            width: 70%;
+        }
+
+        @include respond("xl") {
+            width: 80%;
+        }
+
+        @include respond("md") {
+            width: auto;
+            padding: 4rem 1.5rem;
+            margin: 5rem .5rem;
+        }
+    }
+
+    &__content-container-title {
+        margin-bottom: 2rem;
+    }
+
+    &__content-raw {
+        margin-bottom: 5rem;
+    }
+
+    &__container-image {}
+
+    &__image {
+        width: 100%;
+        object-fit: contain;
+    }
+
+}

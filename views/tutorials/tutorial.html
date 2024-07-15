@@ -6,12 +6,15 @@
 {{ define "content"}}
 <div class="tutorial">
     {{ if .Tutorial }}
-        <div>
-            <div>
+        <div class="tutorial__content">
+            <div class="tutorial__content-container-title">
                 <h1 class="h1">{{ .Tutorial.Title }}</h2>
             </div>
-            <div>
+            <div class="tutorial__content-raw content">
                 {{ .TutorialContentRaw }}
+            </div>
+            <div class="tutorial__container-image">
+                <img class="tutorial__image" src="/public/images/{{ .Tutorial.ImageUrl }}" alt="{{ .Tutorial.ImageAlt }}">
             </div>
         </div>
     {{ else }}

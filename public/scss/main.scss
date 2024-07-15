@@ -14,13 +14,16 @@
 @import "./base/typography";
 
 // Import component files
+@import "./components/article-card";
 @import "./components/codeblock";
 @import "./components/prev-next-guide";
 @import "./components/terminal";
 
 // Import layout files
-@import "./layout/header";
+@import "./layout/content";
 @import "./layout/footer";
+@import "./layout/header";
+@import "./layout/main";
 
 // Import page files
 @import "./pages/guide";

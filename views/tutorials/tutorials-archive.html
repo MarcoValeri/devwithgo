@@ -5,17 +5,27 @@
 
 {{ define "content"}}
 <div class="tutorial-archive">
-    <div>
+    <div class="tutorial-archive__container-title">
         <h2 class="h2">Tutorials</h2>
         <h3 class="h4">Tutorials Go</h3>
     </div>
-    <div>
+    <div class="tutorial-archive__container-articles">
         {{ if .Tutorials }}
-            <ol>
-                {{ range .Tutorials }}
-                    <li class="p-xl"><a class="link" href="/tutorial/{{ .Url }}">{{ .Title }}</a></li>
-                {{ end }}
-            </ol>
+            {{ range .Tutorials }}
+                <div class="article-card tutorial-archive__article-card">
+                    <a href="/tutorial/{{ .Url }}" class="link-no">
+                        <div class="article-card__wrapper">
+                            <div class="article-card__container-image">
+                                <img class="article-card__image" src="/public/images/{{ .ImageUrl }}" alt="{{ .ImageAlt }}" />
+                            </div>
+                            <div class="article-card__container-content">
+                                <h2 class="article-card__content-title h2">{{ .Title }}</h2>
+                                <p class="article-card__content-description p-lg">{{ .Description }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {{ end }}
         {{ else }}
             <h4 class="h4">No tutorial found</h4>
         {{ end }}
