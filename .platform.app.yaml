@@ -23,7 +23,7 @@ mounts:
 disk: 2048
 
 hooks:
-    build:
+    build: |
       chmod 755 /public/images
       go build -o bin/app
 
