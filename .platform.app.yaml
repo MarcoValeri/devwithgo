@@ -24,6 +24,7 @@ disk: 2048
 
 hooks:
     build:
+      chmod 755 /public/images
       go build -o bin/app
 
 web:
