@@ -30,8 +30,8 @@ func TutorialsArchiveController() {
 
 		// Set data page
 		data := TutorialData{
-			PageTitle:       "Go tutorials",
-			PageDescription: "Go tutorials",
+			PageTitle:       "Go tutorials: learn Golang by building real-world projects",
+			PageDescription: "Go tutorials: learn to code in Golang building real-world projects, guiding you from beginner to advanced, helping you to master the Go programming language",
 			CurrentYear:     time.Now().Year(),
 			Tutorials:       getAllTutorials,
 		}
