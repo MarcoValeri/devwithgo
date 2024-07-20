@@ -17,7 +17,7 @@ type: 'golang:1.21'
 mounts:
     '/public/images':
     source: local
-    shared: "true"
+    volume_name: shared_images
 
 # The size of the persistent disk of the application (in MB).
 disk: 2048
