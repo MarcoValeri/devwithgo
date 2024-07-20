@@ -9,6 +9,11 @@ name: devwithgo
 # to find the supported versions for the 'golang' type.
 type: 'golang:1.21'
 
+# Service container for images
+importer-images:
+  type: network-storage:2.0
+  disk: 1024
+
 # The following block defines a single writable directory, 'web/uploads'
 # The 'source' specifies where the writable mount is. The 'local' source
 # indicates that the mount point will point to a local directory on the
