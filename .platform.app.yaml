@@ -17,8 +17,6 @@ type: 'golang:1.21'
 mounts:
     '/public/images':
     source: service
-    service: image_storage
-    source_path: 'images'
 
 # The size of the persistent disk of the application (in MB).
 disk: 2048
