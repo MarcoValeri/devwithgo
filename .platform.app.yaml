@@ -15,9 +15,6 @@ type: 'golang:1.21'
 # application container. The 'source_path' specifies the subdirectory
 # from within the source that the mount should point at. 
 mounts:
-    'web/uploads':
-        source: local
-        source_path: uploads
     '/public/images':
         source: service
         service: image-storage
