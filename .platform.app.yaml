@@ -40,10 +40,4 @@ web:
 
 relationships:
     database: "devwithgo_db:mysql"
-    image_storage: "importer-images"
-
-# Service container for images
-services:
-    importer-images:
-        type: network-storage:2.0
-        disk: 1024
+    image_storage: "importer-images:main"
