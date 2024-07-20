@@ -42,4 +42,3 @@ web:
 
 relationships:
     database: "devwithgo_db:mysql"
-    image_storage: "importer-images:main"
