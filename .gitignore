@@ -7,3 +7,4 @@ node_modules
 # Images
 public/images/*
 !public/images/.gitignore
+!public/images/devwithgo-tutorials.webp

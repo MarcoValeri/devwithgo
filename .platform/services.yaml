@@ -2,6 +2,6 @@ devwithgo_db:
     type: mariadb:11.2
     disk: 2048
 
-image-storage:
-    type: network-storage:2.0
-    disk: 1024
+# image-storage:
+#     type: network-storage:2.0
+#     disk: 1024
