@@ -16,7 +16,8 @@ type: 'golang:1.21'
 # from within the source that the mount should point at. 
 mounts:
     '/public/images':
-    source: service
+    source: local
+    shared: true
 
 # The size of the persistent disk of the application (in MB).
 disk: 2048
