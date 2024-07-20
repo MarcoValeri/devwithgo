@@ -43,3 +43,7 @@ web:
 
 relationships:
     database: "devwithgo_db:mysql"
+
+resources:
+    base_memory: 128
+    memory_ratio: 128
