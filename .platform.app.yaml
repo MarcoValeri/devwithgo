@@ -20,7 +20,7 @@ mounts:
         source_path: uploads
     '/public/images':
         source: service
-        service: image_storage
+        service: image-storage
         source_path: 'images'
 
 # The size of the persistent disk of the application (in MB).
