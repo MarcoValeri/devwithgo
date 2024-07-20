@@ -24,6 +24,8 @@ func main() {
 	controllers.AdminController()
 	controllers.GuidesArchiveController()
 	controllers.GuideController()
+	controllers.TutorialsArchiveController()
+	controllers.TutorialController()
 	controllers.RobotController()
 	controllers.SitemapController()
 

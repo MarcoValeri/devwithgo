@@ -8,8 +8,8 @@
     {{template "description" .}}
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J6HG4D0VJ3"></script>
-    <script>
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-J6HG4D0VJ3"></script>
+    <script defer>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -27,6 +27,9 @@
                 <li class="header__nav-menu-item">
                     <a class="link-no p-lg" href="/guides/guides">Guides</a>
                 </li>
+                <li class="header__nav-menu-item">
+                    <a class="link-no p-lg" href="/tutorials/tutorials">Tutorials</a>
+                </li>
             </ul>
         </nav>
         <div class="header__container-content">
@@ -34,8 +37,26 @@
             <h2 class="header__title">{{.PageTitle}}</h2>
         </div>
     </header>
-    <main>
-        {{template "content" .}}
+    <main class="main">
+        <section class="main__container-content">
+            {{template "content" .}}
+        </section>
+        <aside class="main__container-sidebar">
+            <div class="main__container-sidebar-single">
+                <h2 class="h2">Learn Go</h2>
+                <p class="p-lg">Go guides for beginners to experts: learn all Go concepts step-by-step</p>
+                <div class="main__container-single-button">
+                    <a class="button" href="/guides/guides">Discover more</a>
+                </div>
+            </div>
+            <div class="main__container-sidebar-single">
+                <h2 class="h2">Go tutorials</h2>
+                <p class="p-lg">Go Tutorials: Learn Golang by Building Real-World Projects</a></p>
+                <div class="main__container-single-button"></div>
+                    <a class="button" href="/tutorials/tutorials">Discover more</a>
+                </div>
+            </div>
+        </aside>
     </main>
     <footer class="footer">
         <div class="footer__container-content">

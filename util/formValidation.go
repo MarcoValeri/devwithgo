@@ -1,7 +1,11 @@
 package util
 
 import (
+	"fmt"
+	"mime/multipart"
+	"net/http"
 	"net/mail"
+	"path/filepath"
 	"strings"
 
 	"github.com/microcosm-cc/bluemonday"
@@ -48,4 +52,41 @@ func FormSanitizeStringInput(getStringInput string) string {
 
 	outputInput = strings.TrimSpace(outputInput)
 	return outputInput
+}
+
+func FormIsValidImage(file multipart.File, fileName string) bool {
+	ext := strings.ToLower(filepath.Ext(fileName))
+	allowedExts := map[string]bool{
+		".jpg":  true,
+		".jpeg": true,
+		".png":  true,
+		".webp": true,
+	}
+
+	if !allowedExts[ext] {
+		fmt.Println("Error, invalid image type")
+		return false
+	}
+
+	// Check MIME
+	buffer := make([]byte, 512)
+	_, err := file.Read(buffer)
+	if err != nil {
+		fmt.Println("Error reading the file")
+		return false
+	}
+
+	contentType := http.DetectContentType(buffer)
+	if !strings.HasPrefix(contentType, "image/") {
+		fmt.Println("Error, invalid image content")
+		return false
+	}
+
+	_, err = file.Seek(0, 0)
+	if err != nil {
+		fmt.Println("Error resetting file position")
+		return false
+	}
+
+	return true
 }

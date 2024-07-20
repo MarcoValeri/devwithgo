@@ -19,5 +19,13 @@ func AdminController() {
 	admincontrollers.AdminGuideDelete()
 	admincontrollers.AdminGuideEdit()
 
-	admincontrollers.AdminUploadImage()
+	admincontrollers.AdminTutorials()
+	admincontrollers.AdminTutorialAdd()
+	admincontrollers.AdminTutorialDelete()
+	admincontrollers.AdminTutorialEdit()
+
+	admincontrollers.AdminImages()
+	admincontrollers.AdminImageAdd()
+	admincontrollers.AdminImageEdit()
+	admincontrollers.AdminImageDelete()
 }

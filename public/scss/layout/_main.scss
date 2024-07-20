@@ -1,0 +1,36 @@
+.main {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-areas: "main__container-content main__container-sidebar";
+
+    @include respond("lg") {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+                            "main__container-content"
+                            "main__container-sidebar";
+    }
+
+    &__container-content {
+        grid-area: main__container-content;
+    }
+
+    &__container-sidebar {
+        grid-area: main__container-sidebar;
+        padding: 2rem;
+        border-left: 1px solid $blueGO;
+
+        @include respond("lg") {
+            border: none;
+        }
+    }
+
+    &__container-sidebar-single {
+        padding-top: 1rem;
+        margin-bottom: 5rem;
+        border-top: 3px solid $blueGO;
+    }
+
+    &__container-single-button {
+        margin: 3rem auto;
+    }
+}

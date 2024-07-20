@@ -29,6 +29,7 @@ func AdminGuides() {
 		if errSession != nil {
 			fmt.Println("Error on session-authentication:", errSession)
 		}
+
 		if session.Values["user-admin-authentication"] == true {
 			guidesData, err := models.GuideShowGuides()
 			if err != nil {
@@ -65,7 +66,7 @@ func AdminGuideAdd() {
 			var areAdminGuideInputsValid [6]bool
 			isFormSubmittionValid := false
 
-			// Get value from the form
+			// Get values from the form
 			getAdminGuideTitle := r.FormValue("guide-title")
 			getAdminGuideDescription := r.FormValue("guide-description")
 			getAdminGuideUrl := r.FormValue("guide-url")
@@ -89,7 +90,7 @@ func AdminGuideAdd() {
 					data.TitleError = ""
 					areAdminGuideInputsValid[0] = true
 				} else {
-					data.TitleError = "Title should be between longher than 0"
+					data.TitleError = "Title should be longher than 0"
 					areAdminGuideInputsValid[0] = false
 				}
 
@@ -100,9 +101,6 @@ func AdminGuideAdd() {
 				} else {
 					data.DescriptionError = "Description should be between 1 to 160 charactes"
 					areAdminGuideInputsValid[1] = false
-					fmt.Println(getAdminGuideDescription)
-					fmt.Println("Len:")
-					fmt.Println(len(getAdminGuideDescription))
 				}
 
 				// Url validation

@@ -1,0 +1,43 @@
+{{template "baseAdmin" .}}
+
+{{define "title"}}{{ .PageTitle }}{{end}}
+
+<div class="admin-users">
+    {{ define "adminContent"}}
+        <h2>Admin Tutorial Add</h2>
+        <form method="POST">
+            <div>
+                <input type="text" name="tutorial-title" placeholder="Title*" required />
+            </div>
+            <div>
+                <input type="text" name="tutorial-description" placeholder="Description*" required />
+            </div>
+            <div>
+                <input type="text" name="tutorial-url" placeholder="URL*" required />
+            </div>
+            <div>
+                <input type="datetime-local" name="tutorial-published" required />
+            </div>
+            <div>
+                <input type="datetime-local" name="tutorial-updated" required />
+            </div>
+            <div>
+                <select name="tutorial-image">
+                    {{ if .Images }}
+                        {{ range .Images }}
+                            <option value="{{ .Url }}">{{ .Url }}</option>
+                        {{ end }}
+                    {{ else }}
+                        <option value="no-image-found">No image found</option>
+                    {{ end }}
+                </select>
+            </div>
+            <div>
+                <textarea name="tutorial-content"></textarea>
+            </div>
+            <div>
+                <input type="submit" name="tutorial-add" value="Add new tutorial" />
+            </div>
+        </form>
+    {{end}}
+</div>

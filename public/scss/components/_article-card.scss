@@ -1,0 +1,39 @@
+.article-card {
+    cursor: pointer;
+    border: 1px solid $blueGO;
+    border-radius: 5px;
+
+    &__wrapper {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        grid-template-areas: "article-card__container-image article-card__container-content";
+
+        @include respond("md") {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                                "article-card__container-image"
+                                "article-card__container-content";
+        }
+    }
+
+    &__container-image {
+        grid-area: article-card__container-image;
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &__container-content {
+        grid-area: article-card__container-content;
+        padding: 1rem;
+    }
+
+    &__content-title {
+        margin-bottom: 1rem;
+    }
+
+    &__content-descripion {}
+}

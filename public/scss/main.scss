@@ -3,6 +3,7 @@
 @import "./abstract/variables";
 
 // Import admin files
+@import "./admin/admin-dashboard";
 @import "./admin/admin-users";
 @import "./admin/admin-user-add";
 @import "./admin/base-admin";
@@ -13,15 +14,20 @@
 @import "./base/typography";
 
 // Import component files
+@import "./components/article-card";
 @import "./components/codeblock";
 @import "./components/prev-next-guide";
 @import "./components/terminal";
 
 // Import layout files
-@import "./layout/header";
+@import "./layout/content";
 @import "./layout/footer";
+@import "./layout/header";
+@import "./layout/main";
 
 // Import page files
 @import "./pages/guide";
 @import "./pages/guide-archive";
 @import "./pages/home";
+@import "./pages/tutorial";
+@import "./pages/tutorial-archive";

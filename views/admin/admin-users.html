@@ -2,16 +2,21 @@
 
 {{define "title"}}Admin Users{{end}}
 
+{{ define "adminContent"}}
 <div class="admin-users">
-    {{ define "adminContent"}}
-        <h2>All users</h2>
+    <div class="admin-users__container-title">
+        <h2 class="h2">All users</h2>
+    </div>
+    <div class="admin-users__container-users">
         {{ range .UserAdminData }}
-            <p>User ID: {{ .Id }}</p>
-            <p>Email: {{ .Email }}</p>
-            <p>Password: {{ .Password }}</p>
-            <a href="/admin/user-edit/{{ .Id }}">Edit</a>
-            <a href="/admin/user-delete/{{ .Id }}">Delete</a>
-            <br />
+            <div class="admin-users__container-single-user">
+                <p class="p-lg">User ID: {{ .Id }}</p>
+                <p class="p-lg">Email: {{ .Email }}</p>
+                <p class="p-lg">Password: {{ .Password }}</p>
+                <p class="p-lg"><a href="/admin/user-edit/{{ .Id }}">Edit</a></p>
+                <p class="p-lg"><a href="/admin/user-delete/{{ .Id }}">Delete</a></p>
+            </div>
         {{ end }}
-    {{end}}
+    </div>
 </div>
+{{end}}

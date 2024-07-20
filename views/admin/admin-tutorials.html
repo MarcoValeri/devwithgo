@@ -1,0 +1,27 @@
+{{template "baseAdmin" .}}
+
+{{define "title"}}{{ .PageTitle }}{{end}}
+
+<div class="admin-users">
+    {{ define "adminContent"}}
+        <h2>Admin Tutorials</h2>
+        {{ if .TutorialsWithRelatedImage }}
+            {{ range .TutorialsWithRelatedImage }}
+                <p>Tutorial ID: {{ .Id }}</p>
+                <p>Tutorial Title: {{ .Title }}</p>
+                <p>Tutorial Description: {{ .Description }}</p>
+                <p>Tutorial URL: {{ .Url }}</p>
+                <p>Tutorial Published: {{ .Published }}</p>
+                <p>Tutorial Updated: {{ .Updated }}</p>
+                <img src="/public/images/{{ .ImageUrl }}" alt="{{ .ImageAlt }}" width="100" height="100" />
+                <a href="/admin/tutorial-edit/{{ .Id }}">Edit</a>
+                <a href="/admin/tutorial-delete/{{ .Id }}">Delete</a>
+                <br />
+                <br />
+                <hr>
+            {{ end }}
+        {{ else }}
+            <h4>No tutorials found</h4>
+        {{ end }}
+    {{end}}
+</div>

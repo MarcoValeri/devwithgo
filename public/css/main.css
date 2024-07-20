@@ -10,28 +10,43 @@
 *
 * This project follow the logic of responsive-design
 */
+.admin-dashboard {
+  padding: 3rem 5rem; }
+
+.admin-users {
+  padding: 3rem 5rem; }
+  .admin-users__container-title {
+    margin-bottom: 2rem; }
+  .admin-users__container-single-user {
+    margin-bottom: 2rem; }
+
 .admin-user-add {
   border: 1px solid #d00; }
 
 .base-admin {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  grid-template-areas: "base-admin__sidebar base-admin__content";
-  border: 1px solid #d00; }
+  grid-template-areas: "base-admin__sidebar base-admin__content"; }
   @media only screen and (max-width: 991px) {
     .base-admin {
       grid-template-columns: 1fr 2fr; } }
   @media only screen and (max-width: 767px) {
     .base-admin {
       grid-template-columns: 1fr;
-      grid-template-areas: "base-admin__sidebar" "base-admin__content";
+      grid-template-areas: "base-admin__sidebar" "base-admin__content";
       border: 1px solid #00d; } }
   .base-admin__sidebar {
     grid-area: base-admin__sidebar;
-    border: 1px solid #000; }
+    padding: 2rem 0;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000; }
+  .base-admin__sidebar-element {
+    padding: 1rem;
+    border-bottom: 1px solid #000; }
+    .base-admin__sidebar-element:last-child {
+      border-bottom: none; }
   .base-admin__content {
-    grid-area: base-admin__content;
-    border: 1px solid #00d; }
+    grid-area: base-admin__content; }
 
 * {
   padding: 0;
@@ -89,6 +104,30 @@ html {
   color: #000;
   text-decoration: none; }
 
+.article-card {
+  cursor: pointer;
+  border: 1px solid #00add8;
+  border-radius: 5px; }
+  .article-card__wrapper {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: "article-card__container-image article-card__container-content"; }
+    @media only screen and (max-width: 767px) {
+      .article-card__wrapper {
+        grid-template-columns: 1fr;
+        grid-template-areas: "article-card__container-image" "article-card__container-content"; } }
+  .article-card__container-image {
+    grid-area: article-card__container-image; }
+  .article-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; }
+  .article-card__container-content {
+    grid-area: article-card__container-content;
+    padding: 1rem; }
+  .article-card__content-title {
+    margin-bottom: 1rem; }
+
 .codeblock {
   margin: 2rem auto; }
   .codeblock__container-code-file {
@@ -135,6 +174,8 @@ html {
     color: #c970c9; }
   .codeblock__o-string {
     color: #c79943; }
+  .codeblock__o-string-new-line {
+    color: #fbc868; }
   .codeblock__y-func-name {
     color: #f5f571; }
   .codeblock__y-bracket {
@@ -181,6 +222,57 @@ html {
   .terminal__grey {
     color: #8b949e; }
 
+/*
+* This container has the rules
+* for the html content showed in:
+*       1 - guide
+*       2 - tutorial
+*/
+.content h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem; }
+
+.content h2 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem; }
+
+.content h3 {
+  font-size: 3rem;
+  margin-bottom: 1rem; }
+
+.content h4 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem; }
+
+.content p {
+  font-size: 2rem;
+  line-height: normal; }
+
+.content a {
+  color: #006078; }
+  .content a:hover {
+    text-decoration: none; }
+
+.content ul, .content ol {
+  margin-top: 1rem;
+  margin-left: 2rem; }
+
+.content li {
+  font-size: 2rem;
+  margin-bottom: .5rem; }
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 5rem;
+  background-color: #00add8; }
+  .footer__container-content {
+    text-align: center; }
+  .footer__heart {
+    font-size: 2rem;
+    color: #d00; }
+
 .header {
   padding: 2rem 2rem 5rem 2rem;
   background-color: #00add8; }
@@ -206,69 +298,51 @@ html {
       .header__title {
         font-size: 3rem; } }
 
-.footer {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding: 5rem;
-  background-color: #00add8; }
-  .footer__container-content {
-    text-align: center; }
-  .footer__heart {
-    font-size: 2rem;
-    color: #d00; }
+.main {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-areas: "main__container-content main__container-sidebar"; }
+  @media only screen and (max-width: 991px) {
+    .main {
+      grid-template-columns: 1fr;
+      grid-template-areas: "main__container-content" "main__container-sidebar"; } }
+  .main__container-content {
+    grid-area: main__container-content; }
+  .main__container-sidebar {
+    grid-area: main__container-sidebar;
+    padding: 2rem;
+    border-left: 1px solid #00add8; }
+    @media only screen and (max-width: 991px) {
+      .main__container-sidebar {
+        border: none; } }
+  .main__container-sidebar-single {
+    padding-top: 1rem;
+    margin-bottom: 5rem;
+    border-top: 3px solid #00add8; }
+  .main__container-single-button {
+    margin: 3rem auto; }
 
-.guide {
-  /*
-    * This container has the rules
-    * for the html content showed in
-    * the template
-    */ }
-  .guide__content {
-    width: 60%;
-    padding: 2rem 5rem;
-    margin: 5rem auto;
-    box-shadow: 0 0 50px 0 #00add8;
-    border: 1px solid #00add8;
-    border-radius: 15px; }
-    @media only screen and (max-width: 1499px) {
-      .guide__content {
-        width: 70%; } }
-    @media only screen and (max-width: 1199px) {
-      .guide__content {
-        width: 80%; } }
-    @media only screen and (max-width: 767px) {
-      .guide__content {
-        width: auto;
-        padding: 4rem 1.5rem;
-        margin: 5rem .5rem; } }
-  .guide__content-container-title {
-    margin-bottom: 2rem; }
-  .guide__content-container-content h1 {
-    font-size: 4rem;
-    margin-bottom: 1rem; }
-  .guide__content-container-content h2 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem; }
-  .guide__content-container-content h3 {
-    font-size: 3rem;
-    margin-bottom: 1rem; }
-  .guide__content-container-content h4 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem; }
-  .guide__content-container-content p {
-    font-size: 2rem;
-    line-height: normal; }
-  .guide__content-container-content a {
-    color: #006078; }
-    .guide__content-container-content a:hover {
-      text-decoration: none; }
-  .guide__content-container-content ul, .guide__content-container-content ol {
-    margin-top: 1rem;
-    margin-left: 2rem; }
-  .guide__content-container-content li {
-    font-size: 2rem;
-    margin-bottom: .5rem; }
+.guide__content {
+  width: 60%;
+  padding: 2rem 5rem;
+  margin: 5rem auto;
+  box-shadow: 0 0 50px 0 #00add8;
+  border: 1px solid #00add8;
+  border-radius: 15px; }
+  @media only screen and (max-width: 1499px) {
+    .guide__content {
+      width: 70%; } }
+  @media only screen and (max-width: 1199px) {
+    .guide__content {
+      width: 80%; } }
+  @media only screen and (max-width: 767px) {
+    .guide__content {
+      width: auto;
+      padding: 4rem 1.5rem;
+      margin: 5rem .5rem; } }
+
+.guide__content-container-title {
+  margin-bottom: 2rem; }
 
 .guide-archive {
   padding: 5rem; }
@@ -312,3 +386,43 @@ html {
     margin-bottom: 2rem; }
   .home__guide-description {
     margin-bottom: 4rem; }
+
+.tutorial__content {
+  width: 60%;
+  padding: 2rem 5rem;
+  margin: 5rem auto;
+  box-shadow: 0 0 50px 0 #00add8;
+  border: 1px solid #00add8;
+  border-radius: 15px; }
+  @media only screen and (max-width: 1499px) {
+    .tutorial__content {
+      width: 70%; } }
+  @media only screen and (max-width: 1199px) {
+    .tutorial__content {
+      width: 80%; } }
+  @media only screen and (max-width: 767px) {
+    .tutorial__content {
+      width: auto;
+      padding: 4rem 1.5rem;
+      margin: 5rem .5rem; } }
+
+.tutorial__content-container-title {
+  margin-bottom: 2rem; }
+
+.tutorial__content-raw {
+  margin-bottom: 5rem; }
+
+.tutorial__image {
+  width: 100%;
+  object-fit: contain; }
+
+.tutorial-archive {
+  padding: 5rem; }
+  @media only screen and (max-width: 767px) {
+    .tutorial-archive {
+      padding: 5rem 1rem; } }
+  .tutorial-archive__container-title {
+    text-align: center;
+    margin-bottom: 5rem; }
+  .tutorial-archive__article-card {
+    margin-bottom: 5rem; }

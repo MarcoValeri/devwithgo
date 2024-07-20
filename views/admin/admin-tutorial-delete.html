@@ -1,0 +1,26 @@
+{{template "baseAdmin" .}}
+
+{{define "title"}}{{ .PageTitle }}{{end}}
+
+<div class="admin-users">
+    {{ define "adminContent"}}
+        <h2>Admin Guide Delete</h2>
+        {{ if .Tutorials }}
+            {{ range .Tutorials }}
+                <p>Tutorial ID: {{ .Id }}</p>
+                <p>Tutorial Title: {{ .Title }}</p>
+                <p>Tutorial Description: {{ .Description }}</p>
+                <p>Tutorial URL: {{ .Url }}</p>
+                <p>Tutorial Published: {{ .Published }}</p>
+                <p>Tutorial Updated: {{ .Updated }}</p>
+            {{ end }}
+            <h4>Do you want to delete this tutorial?</h4>
+            <form method="POST">
+                <input type="submit" name="admin-tutorial-delete" value="Delete this tutorial" />
+            </form>
+            <a href="/admin/tutorials">Come back to all tutorials</a>
+        {{ else }}
+            <h4>No tutorial found</h4>
+        {{ end }}
+    {{end}}
+</div>

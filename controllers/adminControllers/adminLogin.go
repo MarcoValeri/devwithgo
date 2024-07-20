@@ -19,6 +19,20 @@ type LoginValidation struct {
 // Initialize the session
 var store = sessions.NewCookieStore(securecookie.GenerateRandomKey(32), securecookie.GenerateRandomKey(32))
 
+// Get user IP address
+// func getUserIpAddress(req *http.Request) []string {
+// 	userIps := req.Header.Get("X-Forwarded-For")
+// 	if userIps == "" {
+// 		return []string{req.RemoteAddr}
+// 	}
+
+// 	ips := strings.Split(userIps, ",")
+// 	for i, ip := range ips {
+// 		ips[i] = strings.TrimSpace(ip)
+// 	}
+// 	return ips
+// }
+
 func AdminLogin() {
 	tmpl := template.Must(template.ParseFiles("./views/admin/admin-login.html"))
 	http.HandleFunc("/admin/login", func(w http.ResponseWriter, r *http.Request) {
@@ -27,6 +41,13 @@ func AdminLogin() {
 			EmailValidation:    "",
 			PasswordValidation: "",
 		}
+
+		// TODO:
+		// 1 - save ip into the db
+		// 2 - if the ip exist in the db AND has ban value TRUE redirect to homepage
+		// Print user ip
+		// userIP := getUserIpAddress(r)
+		// fmt.Println("User IP:", userIP)
 
 		// Session authentication
 		session, errSession := store.Get(r, "session-authentication")

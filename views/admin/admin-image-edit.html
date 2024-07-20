@@ -1,0 +1,48 @@
+{{ template "baseAdmin" }}
+
+{{define "title"}}{{.PageTitle}}{{end}}
+
+<div>
+    {{ define "adminContent" }}
+        <h2>Admin Image Edit</h2>
+        {{ if .Images }}
+            {{ range .Images }}
+            <p>Image ID: {{ .Id }}</p>
+            <p>Image Title: {{ .Title }}</p>
+            <p>Image Description: {{ .Description }}</p>
+            <p>Image Credit: {{ .Credit }}</p>
+            <p>Image Url: {{ .Url }}</p>
+            <p>Image Published: {{ .Published }}</p>
+            <p>Image Updated: {{ .Updated }}</p>
+            <div>
+                <h2>Edit this image</h2>
+                <form method="POST">
+                    <div>
+                        <input type="text" name="image-title-edit" value="{{ .Title }}" placeholder="Title*" required />
+                    </div>
+                    <div>
+                        <input type="text" name="image-description-edit" value="{{ .Description }}" placeholder="Description*" required />
+                    </div>
+                    <div>
+                        <input type="text" name="image-credit-edit" value="{{ .Credit }}" placeholder="Image Credits*" required />
+                    </div>
+                    <div>
+                        <input type="text" name="image-url-edit" value="{{ .Url }}" placeholder="Url*" required />
+                    </div>
+                    <div>
+                        <input type="datetime-local" name="image-published-edit" value="{{ .Published }}" placeholder="Published*" required />
+                    </div>
+                    <div>
+                        <input type="datetime-local" name="image-updated-edit" value="{{ .Updated }}" placeholder="Updated*" required />
+                    </div>
+                    <div>
+                        <input type="submit" name="image-edit" value="Edit this image" />
+                    </div>
+                </form>
+            </div>
+            {{ end }}
+        {{ else }}
+            <h4>No image found</h4>
+        {{ end }}
+    {{ end }}
+</div>

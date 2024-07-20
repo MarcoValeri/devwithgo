@@ -1,0 +1,24 @@
+{{template "baseAdmin" .}}
+
+{{define "title"}}{{ .PageTitle }}{{end}}
+
+<div class="admin-users">
+    {{ define "adminContent"}}
+        {{ if .Images }}
+            {{ range .Images }}
+                <p>Image ID: {{ .Id }}</p>
+                <p>Image Title: {{ .Title }}</p>
+                <p>Image Description: {{ .Description }}</p>
+                <p>Image Credit: {{ .Credit }}</p>
+                <p>Image Url: {{ .Url }}</p>
+                <p>Image Published: {{ .Published }}</p>
+                <p>Image Updated: {{ .Updated }}</p>
+                <img width="100" height="100" src="../../public/images/{{ .Url }}" alt="{{ .Title }}" />
+                <a href="/admin/image-edit/{{ .Id }}">Edit</a>
+                <a href="/admin/image-delete/{{ .Id }}">Delete</a>
+            {{ end }}
+        {{ else }}
+            <h2>No images found</h2>
+        {{ end }}
+    {{end}}
+</div>
