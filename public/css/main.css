@@ -209,22 +209,25 @@ html {
   padding: 1rem;
 }
 .codeblock__b-package {
-  color: #0087ff;
+  color: #569cd6;
+}
+.codeblock__b-js-variable {
+  color: #4fc1ff;
 }
 .codeblock__g-angle-brackets {
   color: #808080;
 }
 .codeblock__g-comment {
-  color: #159f2e;
+  color: #6a9955;
 }
 .codeblock__g-package-name {
-  color: #3ddf86;
+  color: #4ec9b0;
 }
 .codeblock__g-variable-data {
   color: #d4ffd4;
 }
 .codeblock__p-import {
-  color: #c970c9;
+  color: #c586c0;
 }
 .codeblock__o-string {
   color: #c79943;

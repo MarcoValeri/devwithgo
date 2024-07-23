@@ -54,7 +54,11 @@
 
     // Colors
     &__b-package {
-        color: #0087ff;
+        color: #569cd6;
+    }
+
+    &__b-js-variable {
+        color: #4fc1ff;
     }
 
     &__g-angle-brackets {
@@ -62,11 +66,11 @@
     }
 
     &__g-comment {
-        color: #159f2e;
+        color: #6a9955;
     }
 
     &__g-package-name {
-        color: #3ddf86;
+        color: #4ec9b0;
     }
 
     &__g-variable-data {
@@ -74,7 +78,7 @@
     }
 
     &__p-import {
-        color: #c970c9;
+        color: #c586c0;
     }
 
     &__o-string {
