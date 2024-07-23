@@ -10,5 +10,34 @@
         <p class="home__guide-description h4">Learn Go programming quickly and easily. Our step-by-step guides make it simple</p>
         <a class="button" href="/guides/guides">Guides</a>
     </div>
+    <div class="home__container-tutorial">
+        <div class="home__container-tutorial-title">
+            <h2 class="h1">Last tutorials</h2>
+        </div>
+        <div class="home__container-tutorial-card">
+            {{ if .Tutorials }}
+                {{ range .Tutorials }}
+                    <div class="article-card home__card-article">
+                        <a href="/tutorial/{{ .Url }}" class="link-no">
+                            <div class="article-card__wrapper">
+                                <div class="article-card__container-image">
+                                    <img class="article-card__image" src="/public/images/{{ .ImageUrl }}" alt="{{ .ImageAlt }}" />
+                                </div>
+                                <div class="article-card__container-content">
+                                    <h2 class="article-card__content-title h2">{{ .Title }}</h2>
+                                    <p class="article-card__content-description p-lg">{{ .Description }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {{ end }}
+            {{ else }}
+                <h4 class="h4">No tutorial found</h4>
+            {{ end }}
+        </div>
+        <div class="home__container-tutorial-button">
+            <a class="button" href="/tutorials/tutorials">Discover more</a>
+        </div>
+    </div>
 </div>
 {{end}}

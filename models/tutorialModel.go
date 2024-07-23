@@ -146,6 +146,41 @@ func TutorialGetPublishedTutorials() ([]TutorialWithRelatedImage, error) {
 	return allTutorials, nil
 }
 
+func TutorialGetLimitPublishedTutorials(getLimit int) ([]TutorialWithRelatedImage, error) {
+	db := database.DatabaseConnection()
+	defer db.Close()
+
+	rows, err := db.Query("SELECT tutorials.id, tutorials.title, tutorials.description, tutorials.url, tutorials.published, tutorials.updated, tutorials.image_id, images.url, images.description, tutorials.content FROM tutorials JOIN images ON tutorials.image_id = images.id WHERE tutorials.published < NOW() ORDER BY tutorials.published ASC LIMIT ?", getLimit)
+	if err != nil {
+		fmt.Println("Error getting published tutorials with limit:", err)
+		return nil, err
+	}
+	defer rows.Close()
+
+	var allTutorials []TutorialWithRelatedImage
+	for rows.Next() {
+		var tutorialId int
+		var tutorialTitle string
+		var tutorialDescription string
+		var tutorialUrl string
+		var tutorialPublished string
+		var tutorialUpdated string
+		var tutorialImageId int
+		var tutorialImageUrl string
+		var tutorialImageAlt string
+		var tutorialContent string
+		err = rows.Scan(&tutorialId, &tutorialTitle, &tutorialDescription, &tutorialUrl, &tutorialPublished, &tutorialUpdated, &tutorialImageId, &tutorialImageUrl, &tutorialImageAlt, &tutorialContent)
+		if err != nil {
+			return nil, err
+		}
+
+		tutorialDetail := TutorialWithRelatedImageNew(tutorialId, tutorialTitle, tutorialDescription, tutorialUrl, tutorialPublished, tutorialUpdated, tutorialImageId, tutorialImageUrl, tutorialImageAlt, tutorialContent)
+		allTutorials = append(allTutorials, tutorialDetail)
+	}
+
+	return allTutorials, nil
+}
+
 func TutorialEdit(getTutorial Tutorial) error {
 	db := database.DatabaseConnection()
 	defer db.Close()
