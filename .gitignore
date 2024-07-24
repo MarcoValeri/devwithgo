@@ -9,3 +9,5 @@ public/images/*
 !public/images/.gitignore
 !public/images/devwithgo-tutorials.webp
 !public/images/go-with-quill-rich-text-editor.webp
+!public/images/go-with-quill-rich-text-editor-application.webp
+!public/images/go-with-quill-rich-text-editor-application-with-content.webp
