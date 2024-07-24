@@ -165,7 +165,13 @@ html {
   margin-bottom: 1rem;
 }
 .codeblock {
+  max-width: 50vw;
   margin: 2rem auto;
+}
+@media only screen and (max-width: 991px) {
+  .codeblock {
+    max-width: 80vw;
+  }
 }
 .codeblock__container-code-file {
   background-color: #00add8;
@@ -269,7 +275,13 @@ html {
 }
 
 .terminal {
+  max-width: 50vw;
   margin: 2rem auto;
+}
+@media only screen and (max-width: 991px) {
+  .terminal {
+    max-width: 80vw;
+  }
 }
 .terminal__container-code-file {
   background-color: #00add8;
@@ -336,6 +348,10 @@ html {
 .content li {
   font-size: 2rem;
   margin-bottom: 0.5rem;
+}
+.content img {
+  width: 100%;
+  margin: 2rem auto;
 }
 
 .footer {
