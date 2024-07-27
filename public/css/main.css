@@ -214,6 +214,9 @@ html {
   background-color: #000;
   padding: 1rem;
 }
+.codeblock__b-brackets {
+  color: #1303e9;
+}
 .codeblock__b-package {
   color: #569cd6;
 }
